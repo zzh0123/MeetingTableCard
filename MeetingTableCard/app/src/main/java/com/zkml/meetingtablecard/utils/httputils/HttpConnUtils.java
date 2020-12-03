@@ -355,9 +355,12 @@ public class HttpConnUtils {
                 }
 
             }
+
+            LogUtil.i("zzz1", "-----------请求参数------------" + json);
             //请求头信息
             HttpHeaders headers = new HttpHeaders();
             headers.put("Authorization", token);
+            headers.put("j_token", "Bearer " + token);
             if (authSwitch) {
                 //修改 head传值，只有需要鉴权的时候head才有值
                 String timestamp = DateUtils.getCurrentTimeMillis();//获取当前时间毫秒数
