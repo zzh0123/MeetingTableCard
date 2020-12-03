@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="white">#ffffff</color>
+    <color name="white_5">#0DFFFFFF</color>
+    <color name="white_10">#1AFFFFFF</color>
+    <color name="white_15">#26FFFFFF</color>
+    <color name="color_update_desc">#FF606266</color>
+    <color name="color_update_line">#FFEBEEF5</color>
+    <color name="color_update_bt">#FF414FC3</color>
+    <color name="color_update_bt_left">#ffdcdfe6</color>
+    <color name="color_update_top">#FFF4F4F4</color>
+    <color name="sweet_dialog_bg_color">#FFFFFF</color>
+    <color name="group_manager_user_title">#666666</color>
+    <color name="color_login_title">#FF303133</color>
+    <color name="color_login_title_en">#FFC0C4CC</color>
+    <color name="transparent">#00000000</color>
+    <color name="color_login_input">#FFDDDFE5</color>
+    <color name="bc">#bcbcbc</color>
+    <color name="color_login_bt">#414FC3</color>
+    <color name="color_login_cb">#FF909399</color>
+    <color name="small_screen_item_line">#EBEEF5</color>
+    <color name="bright_foreground_dark">#ffffffff</color>
+    <color name="c8">#666666</color>
+    <color name="c_607AED">#607AED</color>
+    <color name="c_E4E7ED">#E4E7ED</color>
+
+</resources>

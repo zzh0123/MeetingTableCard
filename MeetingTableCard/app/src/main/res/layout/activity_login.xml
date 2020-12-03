@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.LoginActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="40dp"
+        android:gravity="center"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/px32"
+        app:cardElevation="@dimen/dp1"
+        app:cardMaxElevation="@dimen/px15">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@mipmap/icon_login" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_login_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/icon_login_out" />
+
+                <ImageView
+                    android:layout_width="@dimen/px90"
+                    android:layout_height="@dimen/px90"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/px72"
+                    android:layout_marginRight="@dimen/px90"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/icon_logo" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/px150"
+                    android:paddingRight="@dimen/px150">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/meeting_login"
+                        android:textColor="@color/color_login_title"
+                        android:textSize="@dimen/logintextsize"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginsize"
+                        android:text="@string/meeting_login_title_en"
+                        android:textColor="@color/color_login_title_en"
+                        android:textSize="@dimen/textSP105"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp28"
+                        android:text="@string/meeting_user_name"
+                        android:textColor="@color/color_login_title"
+                        android:textSize="@dimen/tosmalltextsize"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/px24"
+                        android:background="@drawable/et_login_bg">
+
+                        <ImageView
+                            android:id="@+id/name_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@null"
+                            android:padding="@dimen/px14"
+                            android:src="@mipmap/icon_user_name" />
+
+                        <EditText
+                            android:id="@+id/et_user_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/px36"
+                            android:layout_marginLeft="@dimen/px36"
+                            android:layout_toEndOf="@+id/name_icon"
+                            android:layout_toRightOf="@+id/name_icon"
+                            android:background="@null"
+                            android:hint="@string/meeting_user_name_hint"
+                            android:paddingTop="@dimen/px40"
+                            android:paddingBottom="@dimen/px40"
+                            android:singleLine="true"
+                            android:textColorHint="@color/bc"
+                            android:textSize="@dimen/tosmalltextsize" />
+
+                        <ImageView
+                            android:id="@+id/name_clean"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/px14"
+                            android:contentDescription="@null"
+                            android:src="@mipmap/et_clean"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/px40"
+                        android:text="@string/meeting_password"
+                        android:textColor="@color/color_login_title"
+                        android:textSize="@dimen/tosmalltextsize"
+                        android:textStyle="bold" />
+
+                    <!--密码框-->
+                    <RelativeLayout
+                        android:id="@+id/password_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/px24"
+                        android:background="@drawable/et_login_bg">
+
+                        <ImageView
+                            android:id="@+id/pwd_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@null"
+                            android:padding="@dimen/px14"
+                            android:src="@mipmap/icon_password" />
+
+                        <EditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/px36"
+                            android:layout_marginLeft="@dimen/px36"
+                            android:layout_toEndOf="@+id/pwd_icon"
+                            android:layout_toRightOf="@+id/pwd_icon"
+                            android:background="@null"
+                            android:hint="@string/meeting_password_hint"
+                            android:inputType="textPassword"
+                            android:paddingTop="@dimen/px40"
+                            android:paddingBottom="@dimen/px40"
+                            android:singleLine="true"
+                            android:textColorHint="@color/bc"
+                            android:textSize="@dimen/tosmalltextsize" />
+
+                        <ImageView
+                            android:id="@+id/pwd_see"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/px14"
+                            android:contentDescription="@null"
+                            android:src="@mipmap/et_password_close" />
+                        <!--et_password_open-->
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/px40"
+                        android:background="@drawable/bt_login_bg"
+                        android:paddingLeft="@dimen/px119"
+                        android:paddingTop="@dimen/px16"
+                        android:paddingRight="@dimen/px119"
+                        android:paddingBottom="@dimen/px16"
+                        android:text="@string/meeting_login_button"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSP9" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/px40">
+
+                        <CheckBox
+                            android:id="@+id/cb_password"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:background="@null"
+                            android:button="@drawable/cb_password_select"
+                            android:checked="false"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center"
+                            android:padding="@dimen/paddingsize2"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/px10"
+                            android:layout_toRightOf="@+id/cb_password"
+                            android:text="@string/meeting_login_remember"
+                            android:textColor="@color/color_login_cb"
+                            android:textSize="@dimen/textSp8" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/update_dialog_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/update_dialog_top_bg">
+        <TextView
+            android:id="@+id/tv_leave_message_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/system_update"
+            android:textColor="@color/color_login_title"
+            android:textSize="@dimen/textT0"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/px59"/>
+
+        <ImageView
+            android:id="@+id/iv_cancel"
+            android:layout_width="@dimen/px59"
+            android:layout_height="@dimen/px59"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/cancel"
+            android:layout_margin="@dimen/px59"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_version"
+        android:textColor="@color/color_login_title"
+        android:textSize="@dimen/textPx48"
+        android:textStyle="bold"
+        android:padding="@dimen/px59"/>
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_version_tip"
+        android:textColor="@color/color_update_desc"
+        android:textSize="@dimen/textT3"
+        android:paddingLeft="@dimen/px59"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px59"
+        android:layout_marginBottom="@dimen/px30"
+        android:text="@string/update_desc"
+        android:textColor="@color/color_update_desc"
+        android:textSize="@dimen/textT3"
+        android:paddingLeft="@dimen/px59"/>
+
+    <TextView
+        android:id="@+id/tv_update_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/px59"
+        android:singleLine="false"
+        android:textColor="@color/color_update_desc"
+        android:textSize="@dimen/textT3"
+        android:text="kkkk"
+        android:layout_marginBottom="@dimen/px30"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_show_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px32"
+        android:paddingLeft="@dimen/px59"
+        android:paddingTop="@dimen/px30"
+        android:paddingBottom="@dimen/px30"
+        android:paddingRight="@dimen/px30">
+
+        <TextView
+            android:id="@+id/tv_download_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="--M/--M"
+            android:textColor="@color/c8"
+            android:textSize="@dimen/textT4" />
+
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/px59"
+            tools:text="--.--%"
+            android:textColor="@color/c8"
+            android:textSize="@dimen/textT4"/>
+
+        <TextView
+            android:id="@+id/tv_net_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/px59"
+            tools:text="---K/s"
+            android:textColor="@color/c8"
+            android:textSize="@dimen/textT4"/>
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        android:visibility="gone"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:paddingLeft="@dimen/px59"
+        android:paddingRight="@dimen/px59"
+        android:layout_marginBottom="@dimen/px59"
+        android:progressDrawable="@drawable/progressbar_bg" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp1"
+        android:background="@color/color_update_line" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/bt_later"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/px119"
+            android:background="@drawable/update_bt_left_bg"
+            android:text="@string/update_later"
+            android:textColor="@color/color_update_desc"
+            android:textSize="@dimen/textT3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/bt_now"
+            android:layout_marginRight="@dimen/px60"
+            android:paddingTop="@dimen/px30"
+            android:paddingBottom="@dimen/px30"
+            android:paddingLeft="@dimen/px75"
+            android:paddingRight="@dimen/px75"/>
+
+        <Button
+            android:id="@+id/bt_now"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/px119"
+            android:background="@drawable/update_bt_right_bg"
+            android:text="@string/update_now"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textT3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="@dimen/px46"
+            android:paddingTop="@dimen/px30"
+            android:paddingBottom="@dimen/px30"
+            android:paddingLeft="@dimen/px75"
+            android:paddingRight="@dimen/px75"/>
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

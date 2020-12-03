@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/update_dialog_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/update_dialog_top_bg">
+        <TextView
+            android:id="@+id/tv_leave_message_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/alert_tip_title"
+            android:textColor="@color/color_login_title"
+            android:textSize="@dimen/textT0"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/px59"/>
+
+        <ImageView
+            android:id="@+id/iv_alert_cancel"
+            android:layout_width="@dimen/px59"
+            android:layout_height="@dimen/px59"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/cancel"
+            android:layout_margin="@dimen/px59"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="@dimen/px59">
+        <ImageView
+            android:layout_width="@dimen/px59"
+            android:layout_height="@dimen/px59"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/alert" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alert_tip"
+            android:textColor="@color/color_update_desc"
+            android:textSize="@dimen/textT3"
+            android:layout_marginLeft="@dimen/px32"/>
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp1"
+        android:background="@color/color_update_line" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/px119"
+            android:background="@drawable/update_bt_left_bg"
+            android:text="@string/cancel"
+            android:textColor="@color/color_update_desc"
+            android:textSize="@dimen/textT3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/bt_open"
+            android:layout_marginRight="@dimen/px60"
+            android:paddingTop="@dimen/px30"
+            android:paddingBottom="@dimen/px30"
+            android:paddingLeft="@dimen/px75"
+            android:paddingRight="@dimen/px75"/>
+
+        <Button
+            android:id="@+id/bt_open"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/px119"
+            android:background="@drawable/update_bt_right_bg"
+            android:text="@string/open"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textT3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="@dimen/px46"
+            android:paddingTop="@dimen/px30"
+            android:paddingBottom="@dimen/px30"
+            android:paddingLeft="@dimen/px75"
+            android:paddingRight="@dimen/px75"/>
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

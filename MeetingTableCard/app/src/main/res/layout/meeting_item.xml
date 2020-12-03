@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_height"
+    android:background="@mipmap/login_bg">
+    <!--    android:background="@drawable/meeting_item_bg"-->
+    <ImageView
+        android:id="@+id/iv_meeting"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:contentDescription="@null"
+        android:src="@mipmap/meeting_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="@dimen/dp13_5"
+        android:layout_marginTop="@dimen/px22"
+        android:layout_marginBottom="@dimen/px22"/>
+
+    <TextView
+        android:id="@+id/tv_meeting_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/T3"
+        android:layout_marginTop="@dimen/dp5_5"
+        android:text="@string/meeting_login_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSp7"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/iv_meeting"
+        app:layout_constraintTop_toTopOf="@+id/iv_meeting"
+        tools:text="欢迎您,张三" />
+
+    <ImageView
+        android:id="@+id/iv_time"
+        android:layout_width="@dimen/px22"
+        android:layout_height="@dimen/px22"
+        android:layout_marginTop="@dimen/marginsize"
+        android:contentDescription="@null"
+        android:src="@mipmap/time"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_meeting_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_meeting_name" />
+
+    <TextView
+        android:id="@+id/tv_meeting_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px9"
+        android:text="@string/meeting_login_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSp7"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_time"
+        app:layout_constraintLeft_toRightOf="@+id/iv_time"
+        app:layout_constraintTop_toTopOf="@+id/iv_time"
+        tools:text="会议时间：2019-12-01 上午 ～ 2019-12-01 上午" />
+
+    <ImageView
+        android:id="@+id/iv_dot_white"
+        android:layout_width="@dimen/px6"
+        android:layout_height="@dimen/px6"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:contentDescription="@null"
+        android:src="@mipmap/dot_white"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_time"
+        app:layout_constraintRight_toRightOf="@+id/iv_time"
+        app:layout_constraintTop_toBottomOf="@+id/iv_time" />
+
+    <TextView
+        android:id="@+id/tv_meeting_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px9"
+        android:text="@string/meeting_login_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSp7"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_dot_white"
+        app:layout_constraintLeft_toRightOf="@+id/iv_dot_white"
+        app:layout_constraintTop_toTopOf="@+id/iv_dot_white"
+        tools:text="承办单位：滁州市委政法委员会" />
+
+    <ImageView
+        android:id="@+id/iv_location"
+        android:layout_width="@dimen/px22"
+        android:layout_height="@dimen/px22"
+        android:layout_marginLeft="@dimen/px150"
+        android:contentDescription="@null"
+        android:src="@mipmap/location"
+        app:layout_constraintLeft_toRightOf="@+id/tv_meeting_time"
+        app:layout_constraintTop_toTopOf="@+id/iv_time" />
+
+    <TextView
+        android:id="@+id/tv_meeting_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px9"
+        android:text="@string/meeting_login_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSp7"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_location"
+        app:layout_constraintLeft_toRightOf="@+id/iv_location"
+        app:layout_constraintTop_toTopOf="@+id/iv_location"
+        tools:text="会议地点：第五会议室" />
+
+
+    <ImageView
+        android:id="@+id/iv_dot_white_solid"
+        android:layout_width="@dimen/px6"
+        android:layout_height="@dimen/px6"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:contentDescription="@null"
+        android:src="@mipmap/dot_white"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_location"
+        app:layout_constraintRight_toRightOf="@+id/iv_location"
+        app:layout_constraintTop_toBottomOf="@+id/iv_location" />
+
+    <TextView
+        android:id="@+id/tv_meeting_under_taker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px9"
+        android:text="@string/meeting_login_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSp7"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_dot_white_solid"
+        app:layout_constraintLeft_toRightOf="@+id/iv_dot_white_solid"
+        app:layout_constraintTop_toTopOf="@+id/iv_dot_white_solid"
+        tools:text="承办人：肖莹莹（15856660199）" />
+
+    <TextView
+        android:id="@+id/tv_get_into"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/meeting_item_bt_bg"
+        android:paddingLeft="@dimen/space_10dp"
+        android:paddingTop="@dimen/dp5_5"
+        android:paddingRight="@dimen/space_10dp"
+        android:paddingBottom="@dimen/dp5_5"
+        android:text="@string/get_into"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSp8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
