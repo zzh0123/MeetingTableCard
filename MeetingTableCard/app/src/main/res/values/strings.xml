@@ -18,6 +18,9 @@
     <string name="network_disconnect">网络异常，请检查网络是否连接</string>
     <string name="app_key_middle">emttbDEhQA==</string>
     <string name="app_key_end">#$%#</string>
+    <string name="date_tip">请选择开始日期</string>
+    <string name="date_tip1">请选择结束日期</string>
+    <string name="send_tip">请先输入内容！</string>
 
     <string name="system_update">系统升级</string>
     <string name="new_version">检测到最新版本</string>
@@ -33,9 +36,14 @@
     <string name="download_progress">下载进度&#8194; </string>
     <string name="download_speed">下载速度&#8194; </string>
     <string name="download_success">下载完成</string>
-    <string name="need_storage">需要存储权限</string>
+    <string name="need_storage">需要访问手机存储权限！</string>
     <string name="cancel">取消</string>
     <string name="open">开启</string>
+
+    <string name="inputeror">不支持输入表情符号</string>
+    <string name="maxlength">你输入的字数已经超过200字限制！</string>
+    <string name="publish_comment">发表评论...</string>
+    <string name="publish">发表</string>
 
     <string name="cannot_use_phone">设备暂不能直接拨打电话！</string>
     <string name="cannot_use_msg">设备暂不能直接发送短信！</string>
@@ -64,10 +72,53 @@
     <string name="meeting_name">会议名称</string>
     <string name="meeting_name_hint">请输入会议名称</string>
     <string name="meeting_date">会议时间</string>
+    <string name="meeting_date1">会议时间: </string>
+    <string name="meeting_unit">承办单位: </string>
+    <string name="meeting_location">会议地点: </string>
+    <string name="meeting_under_taker">承办人: </string>
     <string name="choose_start_date">请选择起始日期</string>
     <string name="choose_end_date">请选择结束日期</string>
     <string name="search">查询</string>
     <string name="get_into">进入</string>
+    <string name="agenda">会议议程</string>
+    <string name="documentation">文件资料</string>
+    <string name="documentation1">会议资料</string>
+    <string name="discussion">互动讨论</string>
+    <string name="vote">投票表决</string>
+    <string name="summary">会议纪要</string>
+    <string name="download">下载附件</string>
+    <string name="download_fail">下载附件失败！</string>
+
+    <string-array name="chinese_week_string_array">
+        <item>周日</item>
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
+    </string-array>
+
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+
+    <string name="sure">确定</string>
+    <string name="dianstr">点</string>
+    <string name="fenstr">分</string>
+    <string name="alertmsg">请选择大于当前时间30分钟后的时间</string>
+    <string name="alertmsg1">请选择大于当前时间</string>
+    <string name="alertmsg2">请选择小于当前的月份</string>
+    <string name="alertmsg3">请选择72小时之内的时间</string>
+    <string name="alertmsg_thrity">请选择30分钟之内的时间</string>
+    <string name="alertmsg_content">请选择%1$s分钟之内的时间</string>
+    <string name="alertmsg4">请选择小于当前的时间</string>
+    <string name="assets_select_time_over_now">选择的时间不能大于当前时间</string>
+    <string name="assets_select_time_failure">选择的时间失败</string>
 
     <!--天气-->
     <string name="weather_hailstone">冰雹</string>

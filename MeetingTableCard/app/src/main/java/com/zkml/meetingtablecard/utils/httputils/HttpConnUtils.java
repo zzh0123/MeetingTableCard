@@ -356,6 +356,11 @@ public class HttpConnUtils {
 
             }
 
+            if (map != null){
+                for (String key : map.keySet()) {
+                    LogUtil.i("mzkml", "-----------请求参数------------" + key + "=" + map.get(key));
+                }
+            }
             LogUtil.i("zzz1", "-----------请求参数------------" + json);
             //请求头信息
             HttpHeaders headers = new HttpHeaders();

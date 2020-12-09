@@ -56,4 +56,18 @@ public class Constant {
     public static final String LOGIN = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/login";
     // 获取当前登录人会议信息列表
     public static final String GET_MEETING_LIST = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getMeetingApplyList";
+    // 获取会议议程
+    public static final String GET_MEETING_AGENDA = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getMeetingAgenda";
+    // 获取会议资料
+    public static final String GET_MEETING_MATERIALS = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getMeetingMaterials";
+    // 获取会议互动讨论列表
+    public static final String GET_COMMENT_LIST = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getApplyCommentList";
+    // 点赞
+    public static final String GET_LIKE_COMMENT = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/likeComment";
+    // 取消点赞
+    public static final String GET_UNLIKE_COMMENT = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/unLikeComment";
+    // 发表互动聊天内容
+    public static final String GET_SEND_COMMENT = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/sendComment";
+    // 获取会议纪要信息
+    public static final String GET_MEETING_SUMMARY = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getMeetingSummary";
 }

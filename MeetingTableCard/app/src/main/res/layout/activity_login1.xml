@@ -8,6 +8,7 @@
     android:background="@mipmap/login_bg">
 
     <ImageView
+        android:id="@+id/iv_login_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/sign_out"

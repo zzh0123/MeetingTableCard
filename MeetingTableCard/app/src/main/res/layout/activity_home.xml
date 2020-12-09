@@ -5,19 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.HomeActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@mipmap/login_bg">
+
+    <ImageView
+        android:id="@+id/iv_login_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/sign_out"
+        android:layout_margin="@dimen/space_10dp"
+        android:layout_gravity="right"/>
+
     <TextView
+        android:id="@+id/tv_meeting_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/meeting_login_button"
         android:textColor="@color/white"
-        android:textSize="@dimen/textsize"
+        android:textSize="@dimen/logintextsize"
         android:textStyle="bold"
-        android:layout_marginTop="@dimen/px150"/>
+        android:layout_marginTop="@dimen/px150"
+        android:layout_gravity="center_horizontal"
+        tools:text="“不忘初心,牢记使命”主题会议"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/px90"/>
+        android:layout_height="wrap_content" />
 </LinearLayout>

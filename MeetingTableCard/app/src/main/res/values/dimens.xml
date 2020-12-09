@@ -347,12 +347,22 @@
     <!---->
     <dimen name="dp1">1dp</dimen>
     <dimen name="dp121">121dp</dimen>
+    <dimen name="dp1_5">1.5dp</dimen>
     <dimen name="dp2_5">2.5dp</dimen>
+    <dimen name="dp3_5">3.5dp</dimen>
+    <dimen name="dp4_5">4.5dp</dimen>
     <dimen name="dp5_5">5.5dp</dimen>
     <dimen name="dp7_5">7.5dp</dimen>
+    <dimen name="dp9_8">9.8dp</dimen>
     <dimen name="dp10_5">10.5dp</dimen>
     <dimen name="dp11_5">11.5dp</dimen>
     <dimen name="dp13_5">13.5dp</dimen>
+    <dimen name="dp25">25dp</dimen>
+    <dimen name="dp51">51dp</dimen>
+    <dimen name="dp56_5">56.5dp</dimen>
     <dimen name="dp108_5">108.5dp</dimen>
-
+    <dimen name="dp100">100dp</dimen>
+    <dimen name="dp200">200dp</dimen>
+    <dimen name="dp250">250dp</dimen>
+    <dimen name="dp500">500dp</dimen>
 </resources>

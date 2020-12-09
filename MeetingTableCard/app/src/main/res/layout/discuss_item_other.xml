@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/px46"
+    android:paddingLeft="@dimen/px90">
+
+
+    <com.zkml.meetingtablecard.view.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/px60"
+        android:layout_height="@dimen/px60"
+        android:src="@mipmap/default_head"
+        app:border_color="@color/transparent"
+        app:border_width="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px10"
+        android:textColor="@color/c_606266"
+        android:textSize="@dimen/textSp8"
+        app:layout_constraintLeft_toRightOf="@+id/iv_head"
+        app:layout_constraintTop_toTopOf="@+id/iv_head"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+        tool:text="张科长" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px16"
+        android:textColor="@color/c_606266"
+        android:textSize="@dimen/textSp7"
+        app:layout_constraintLeft_toRightOf="@+id/tv_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        tool:text="张科长" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp4_5"
+        android:text=""
+        android:textColor="@color/c_606266"
+        android:textSize="@dimen/textSp8"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+        tool:text="这个方案不错!"
+        android:background="@drawable/discuss_item_bg"
+        android:paddingLeft="@dimen/space_10dp"
+        android:paddingRight="@dimen/space_10dp"
+        android:paddingTop="@dimen/px24"
+        android:paddingBottom="@dimen/px24"/>
+
+    <LinearLayout
+        android:id="@+id/ll_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toRightOf="@+id/tv_content"
+        app:layout_constraintTop_toTopOf="@+id/tv_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_content"
+        android:paddingLeft="@dimen/space_10dp">
+        <ImageView
+            android:id="@+id/iv_like"
+            android:layout_width="@dimen/dp9_8"
+            android:layout_height="@dimen/dp9_8"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/like1" />
+
+        <TextView
+            android:id="@+id/tv_like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/c_909399"
+            android:textSize="@dimen/textSp7"
+            tool:text="20"
+            android:layout_marginLeft="@dimen/px9"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

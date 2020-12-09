@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MeetingAgendaActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px104"
+        android:background="@color/c_3D358F"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/space_10dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/marginsize"
+            android:text="@string/agenda"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSP9"
+            tools:text="会议议程" />
+    </LinearLayout>
+
+    <com.haibin.calendarview.CalendarLayout
+        android:id="@+id/calendarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/c_5368C1"
+        android:orientation="vertical"
+        app:calendar_show_mode="both_month_week_view"
+        app:default_status="shrink">
+
+        <com.haibin.calendarview.CalendarView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            app:current_day_text_color="@color/c7"
+            app:current_month_text_color="@color/c8"
+            app:day_text_size="9sp"
+            app:lunar_text_size="0sp"
+            app:month_view="com.zkml.meetingtablecard.view.calendar.MeiZuMonthView"
+            app:month_view_show_mode="mode_only_current"
+            app:other_month_text_color="@color/c_5368C1"
+            app:scheme_text="假"
+            app:scheme_text_color="@color/c8"
+            app:scheme_theme_color="@color/c8"
+            app:select_mode="single_mode"
+            app:selected_text_color="@color/white"
+            app:selected_theme_color="@color/c_5368C1"
+            app:week_bar_view="com.zkml.meetingtablecard.view.calendar.CustomWeekBar"
+            app:week_background="@color/c_5368C1"
+            app:week_text_color="@color/white"
+            app:year_view_week_text_size="9sp"
+            app:week_bar_height="20dp"
+            app:week_line_background="#00000000"
+            app:week_line_margin="16dp"
+            app:week_start_with="mon"
+            app:week_text_size="9sp"
+            app:week_view="com.zkml.meetingtablecard.view.calendar.MeizuWeekView" />
+
+    </com.haibin.calendarview.CalendarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/space_10dp"
+        android:layout_marginRight="@dimen/space_10dp" />
+</LinearLayout>

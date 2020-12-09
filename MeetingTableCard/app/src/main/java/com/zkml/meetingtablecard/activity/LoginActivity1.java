@@ -48,7 +48,7 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
      * 手机号
      */
     private EditText etPhone, etAuthCode;
-    private ImageView ivClean;
+    private ImageView ivClean, ivLoginOut;
     /**
      * 登录
      */
@@ -81,9 +81,14 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
         tvGetAuthCode.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
 
+        tvLogin.setClickable(false);
+        tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
+
         //输入框右侧操作
         ivClean = (ImageView) findViewById(R.id.iv_clean);
         ivClean.setOnClickListener(this);
+        ivLoginOut = (ImageView) findViewById(R.id.iv_login_out);
+        ivLoginOut.setOnClickListener(this);
     }
 
     @Override
@@ -127,6 +132,13 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
                 } else {
                     ivClean.setVisibility(View.VISIBLE);
                 }
+                if (StringUtils.isStrEmpty(phone) || StringUtils.isStrEmpty(authCode)){
+                    tvLogin.setClickable(false);
+                    tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
+                } else {
+                    tvLogin.setClickable(true);
+                    tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg);
+                }
             }
         });
 
@@ -144,6 +156,13 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable s) {
                 authCode = s.toString();
+                if (StringUtils.isStrEmpty(phone) || StringUtils.isStrEmpty(authCode)){
+                    tvLogin.setClickable(false);
+                    tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
+                } else {
+                    tvLogin.setClickable(true);
+                    tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg);
+                }
             }
         });
     }
@@ -288,9 +307,12 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
                             if (!StringUtils.isStrEmpty(data)) {
                                 Map<String, Object> dataMap = StringUtils.transJsonToMap(data);
                                 String token = (String) dataMap.get("token");
-                                if (!StringUtils.isStrEmpty(token)) {
+                                String userId = (String) dataMap.get("userId");
+                                if (!StringUtils.isStrEmpty(token) && !StringUtils.isStrEmpty(userId)) {
                                     editor.putString("token", token);
-                                    Intent intent = new Intent(LoginActivity1.this, HomeActivity.class);
+                                    editor.putString("userId", userId);
+                                    editor.commit();
+                                    Intent intent = new Intent(LoginActivity1.this, MeetingListActivity.class);
                                     startActivity(intent);
                                 }else {
                                     showCustomToast(getString(R.string.system_error_tip));

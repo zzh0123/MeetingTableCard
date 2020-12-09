@@ -28,10 +28,10 @@
             tools:text="欢迎您,张三" />
 
         <ImageView
+            android:id="@+id/iv_login_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:padding="@dimen/px16"
             android:scaleType="fitXY"
             android:src="@mipmap/sign_out" />
     </RelativeLayout>
@@ -123,6 +123,7 @@
             android:background="@color/c_E4E7ED" />
 
         <RelativeLayout
+            android:id="@+id/rl_end_date"
             android:layout_width="@dimen/dp108_5"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/view_line"

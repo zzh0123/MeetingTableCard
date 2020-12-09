@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_comment_shape"
+    android:paddingLeft="@dimen/T2"
+    android:paddingTop="@dimen/px59"
+    android:paddingRight="@dimen/T2"
+    android:paddingBottom="@dimen/space_10dp"
+    android:orientation="vertical">
+
+    <com.zkml.meetingtablecard.view.ContainsEmojiEditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px180"
+        android:background="@drawable/bg_send_shape"
+        android:gravity="start"
+        android:hint="@string/publish_comment"
+        android:lineSpacingExtra="@dimen/px6"
+        android:maxLength="100"
+        android:paddingLeft="@dimen/px40"
+        android:paddingTop="@dimen/space_10dp"
+        android:paddingRight="@dimen/px65"
+        android:paddingBottom="@dimen/space_10dp"
+        android:textColor="@color/C7"
+        android:textColorHint="@color/C9"
+        android:textSize="@dimen/weibao_textsize3" />
+
+    <TextView
+        android:id="@+id/tv_send_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:background="@drawable/bt_download_bg"
+        android:gravity="center"
+        android:paddingLeft="@dimen/px42"
+        android:paddingTop="@dimen/px15"
+        android:paddingRight="@dimen/px42"
+        android:paddingBottom="@dimen/px15"
+        android:text="@string/publish"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textT3" />
+</LinearLayout>
