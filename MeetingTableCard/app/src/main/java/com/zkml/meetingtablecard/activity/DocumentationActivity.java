@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.google.gson.reflect.TypeToken;
 import com.zkml.meetingtablecard.R;
@@ -54,6 +55,7 @@ public class DocumentationActivity extends AppCompatActivity implements
      * fileUrl
      */
     private String mFileUrl;
+    private LinearLayout llBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,14 @@ public class DocumentationActivity extends AppCompatActivity implements
     }
 
     private void initEvent() {
+        llBack = findViewById(R.id.ll_back);
+        llBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         adapter = new FileItemAdapter(this, fileList);
         adapter.setOnItemDownloadClickListener(new FileItemAdapter.OnItemDownloadClickListener() {
             @Override
@@ -99,17 +109,6 @@ public class DocumentationActivity extends AppCompatActivity implements
 
             }
         });
-//        adapter.setOnItemClickListener(new MeetingItemAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int pos) {
-//                MeetingItemBean itemBean = meetingList.get(pos);
-//                if (itemBean != null){
-//                    Intent intent = new Intent(MeetingListActivity.this, HomeActivity.class);
-//                    intent.putExtra("itemBean",itemBean);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
         recyclerView.setAdapter(adapter);
     }
 

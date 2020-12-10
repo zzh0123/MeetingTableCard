@@ -9,6 +9,8 @@ public class IPConfig {
 
     //IP路径：内网和公网
     public static String IPCONFIG;
+    //IP路径：内网和公网
+    public static String SERVER_NAME;
     //IP路径：API网关的路径地址
     public static String API_IPCONFIG;
     public static String LOGIN_IPCONFIG;
@@ -28,6 +30,7 @@ public class IPConfig {
             IPCONFIG = "http://app-gateway.luoex.cn:8088";//API网关地址
             LOGIN_IPCONFIG = "http://person.http.luoex.xin:6969";
             SERVER_URI = "tcp://imessage.broker.luoex.xin:20555"; // 生产环境, 消息订阅tcp接口地址
+            SERVER_NAME = "/meeting-test";
             return true;
         } else {//测试网
 //            IPCONFIG = "http://10.5.4.49:4404";//个人平台-重构调试
@@ -35,6 +38,7 @@ public class IPConfig {
 //            IPCONFIG = "http://172.16.8.22:9069"; // 本地 meeting
             IPCONFIG = "http://10.5.4.242:2004"; // 测试环境网关地址* http://10.5.4.35:2403  http://10.5.4.97:2004 http://10.5.4.242:2004
             SERVER_URI = "tcp://10.5.4.27:20555"; // 生产环境, 消息订阅tcp接口地址
+            SERVER_NAME = "/meeting-test";
             return false;
         }
     }

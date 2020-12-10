@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".activity.MeetingListActivity">
+    android:background="@color/white">
 
     <LinearLayout
+        android:id="@+id/ll_back"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px104"
         android:background="@color/c_3D358F"
@@ -34,323 +33,210 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/px90"
+        android:paddingLeft="@dimen/px150"
+        android:paddingRight="@dimen/px150">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/meeting_item_bg"
-            android:paddingLeft="@dimen/px150"
-            android:paddingTop="@dimen/px90"
-            android:paddingRight="@dimen/px150"
-            android:paddingBottom="@dimen/px90"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px1"
-                android:background="@color/c_E4E7ED"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="52dp" />
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px1"
-                android:background="@color/c_E4E7ED"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="52dp" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="@dimen/px1"
-                android:layout_height="0dp"
-                android:layout_centerVertical="true"
-                android:background="@color/small_screen_item_line"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/view3"
-                android:layout_width="@dimen/px1"
-                android:layout_height="0dp"
-                android:background="@color/small_screen_item_line"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="@dimen/px270"
-                android:layout_height="wrap_content"
-                android:background="@color/small_screen_item_line"
-                android:gravity="center"
-                android:paddingTop="@dimen/px30"
-                android:paddingBottom="@dimen/px30"
-                android:text="会议名称"
-                android:textColor="@color/c_303133"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="@dimen/px270"
-                android:layout_height="wrap_content"
-                android:background="@color/small_screen_item_line"
-                android:gravity="center"
-                android:paddingTop="@dimen/px30"
-                android:paddingBottom="@dimen/px30"
-                android:text="承办人"
-                android:textColor="@color/c_303133"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="@dimen/px270"
-                android:layout_height="wrap_content"
-                android:background="@color/small_screen_item_line"
-                android:gravity="center"
-                android:paddingTop="@dimen/px30"
-                android:paddingBottom="@dimen/px30"
-                android:text="参会人员"
-                android:textColor="@color/c_303133"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="@dimen/px270"
-                android:layout_height="wrap_content"
-                android:background="@color/small_screen_item_line"
-                android:gravity="center"
-                android:paddingTop="@dimen/px30"
-                android:paddingBottom="@dimen/px30"
-                android:text="纪要内容"
-                android:textColor="@color/c_303133"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_summary_content"
-                app:layout_constraintEnd_toStartOf="@+id/tv_summary_content"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@+id/tv_summary_content" />
-
-            <TextView
-                android:id="@+id/tv_meeting_name"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/px30"
-                android:text=""
-                android:textColor="@color/c_606266"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintEnd_toStartOf="@+id/view3"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/view2"
-                tools:text="“不忘初心,牢记使命”主题会议" />
-
-            <View
-                android:id="@+id/view22"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px1"
-                android:background="@color/c_E4E7ED"
-                app:layout_constraintTop_toBottomOf="@+id/tv_meeting_name" />
-
-            <TextView
-                android:id="@+id/tv_undertaker"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/px30"
-                android:text=""
-                android:textColor="@color/c_606266"
-                app:layout_constraintBottom_toBottomOf="@+id/textView11"
-                app:layout_constraintEnd_toStartOf="@+id/view3"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@+id/textView11"
-                app:layout_constraintVertical_bias="0.0"
-                tools:text="李晓红" />
-
-            <View
-                android:id="@+id/view44"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px1"
-                android:background="@color/c_E4E7ED"
-                app:layout_constraintTop_toBottomOf="@+id/tv_undertaker" />
-
-            <TextView
-                android:id="@+id/tv_participants"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/px30"
-                android:text=""
-                android:textColor="@color/c_606266"
-                app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                app:layout_constraintEnd_toStartOf="@+id/view3"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@+id/textView13"
-                tools:text="李晓、李红、王伊尔、梧桐" />
-
-            <View
-                android:id="@+id/view55"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px1"
-                android:background="@color/c_E4E7ED"
-                app:layout_constraintTop_toBottomOf="@+id/tv_participants" />
-
-            <TextView
-                android:id="@+id/tv_summary_content"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/px30"
-                android:text=""
-                android:textColor="@color/c_606266"
-                app:layout_constraintEnd_toStartOf="@+id/view3"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView13"
-                tools:text="我是纪要内容1.会议重点" />
-
-            <View
-                android:id="@+id/view66"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px1"
-                android:background="@color/c_E4E7ED"
-                app:layout_constraintTop_toBottomOf="@+id/tv_summary_content" />
-
-            <View
-                android:id="@+id/view33"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px1"
-                android:background="@color/c_E4E7ED"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
+            android:layout_height="match_parent"
+            android:background="@color/small_screen_item_line"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp1"
+            android:paddingBottom="@dimen/dp1"
+            android:paddingRight="@dimen/dp1"
+            android:paddingLeft="@dimen/dp1">
             <LinearLayout
-                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/textView">
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="@dimen/px270"
+                    android:layout_height="match_parent"
+                    android:background="@color/c_F5F7FF"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/px30"
+                    android:paddingBottom="@dimen/px30"
+                    android:text="@string/meeting_name"
+                    android:textColor="@color/c_303133"
+                    android:layout_marginRight="@dimen/dp1" />
 
-                <LinearLayout
-                    android:id="@+id/layout1"
+                <TextView
+                    android:id="@+id/tv_meeting_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="@dimen/px270"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/small_screen_item_line"
-                        android:gravity="center"
-                        android:paddingTop="@dimen/px30"
-                        android:paddingBottom="@dimen/px30"
-                        android:text="会议时间"
-                        android:textColor="@color/c_303133"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tv_date"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tv_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="100"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="@dimen/px30"
-                        android:paddingTop="@dimen/px30"
-                        android:paddingBottom="@dimen/px30"
-                        android:text="2019-1-10 10:00-12:00"
-                        android:textColor="@color/c_606266"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/textView3"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/textView33"
-                        android:layout_width="@dimen/px270"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/small_screen_item_line"
-                        android:gravity="center"
-                        android:paddingTop="@dimen/px30"
-                        android:paddingBottom="@dimen/px30"
-                        android:text="会议地点"
-                        android:textColor="@color/c_303133"
-
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tv_meeting_location"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tv_meeting_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="100"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="@dimen/px30"
-                        android:paddingTop="@dimen/px30"
-                        android:paddingBottom="@dimen/px30"
-                        android:text="2019-1-10 10:00-12:00"
-                        android:textColor="@color/c_606266"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/textView33"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </LinearLayout>
-
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/px30"
+                    android:text=""
+                    android:textColor="@color/c_606266"
+                    tools:text="“不忘初心,牢记使命”主题会议\n“不忘初心,牢记使命”主题会议\n“不忘初心,牢记使命”主题会议\n“不忘初心,牢记使命”主题会议\n"
+                    android:background="@color/white"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@+id/textView15"
-                app:layout_constraintTop_toBottomOf="@+id/textView15"
-                android:background="@color/small_screen_item_line">
-
+                android:layout_marginTop="@dimen/dp1">
                 <TextView
-                    android:id="@+id/textView4"
                     android:layout_width="@dimen/px270"
                     android:layout_height="match_parent"
+                    android:background="@color/c_F5F7FF"
                     android:gravity="center"
-                    android:text="附件"
-                    android:textColor="@color/c_303133"
                     android:paddingTop="@dimen/px30"
-                    android:paddingBottom="@dimen/px30"/>
+                    android:paddingBottom="@dimen/px30"
+                    android:text="@string/meeting_date"
+                    android:textColor="@color/c_303133"
+                    android:layout_marginRight="@dimen/dp1" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/px30"
+                    android:text=""
+                    android:textColor="@color/c_606266"
+                    tools:text="2019-1-10 10:00-12:00，\n,2019-1-10 10:00-12:00，\n,2019-1-10 10:00-12:00\n,2019-1-10 10:00-12:00"
+                    android:background="@color/white"
+                    android:layout_marginRight="@dimen/dp1" />
+
+                <TextView
+                    android:layout_width="@dimen/px270"
+                    android:layout_height="match_parent"
+                    android:background="@color/c_F5F7FF"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/px30"
+                    android:paddingBottom="@dimen/px30"
+                    android:text="@string/meeting_location"
+                    android:textColor="@color/c_303133"
+                    android:layout_marginRight="@dimen/dp1" />
+
+                <TextView
+                    android:id="@+id/tv_meeting_location"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/px30"
+                    android:text=""
+                    android:textColor="@color/c_606266"
+                    tools:text="2019-1-10 10:00-12:00"
+                    android:background="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp1">
+                <TextView
+                    android:layout_width="@dimen/px270"
+                    android:layout_height="match_parent"
+                    android:background="@color/c_F5F7FF"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/px30"
+                    android:paddingBottom="@dimen/px30"
+                    android:text="@string/meeting_under_taker1"
+                    android:textColor="@color/c_303133"
+                    android:layout_marginRight="@dimen/dp1" />
+
+                <TextView
+                    android:id="@+id/tv_undertaker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/px30"
+                    android:text=""
+                    android:textColor="@color/c_606266"
+                    tools:text="李晓、李红、王伊尔、梧桐\n,晓、李红、王伊尔、梧桐\n,晓、李红、王伊尔、梧桐\n"
+                    android:background="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp1">
+                <TextView
+                    android:layout_width="@dimen/px270"
+                    android:layout_height="match_parent"
+                    android:background="@color/c_F5F7FF"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/px30"
+                    android:paddingBottom="@dimen/px30"
+                    android:text="@string/participants"
+                    android:textColor="@color/c_303133"
+                    android:layout_marginRight="@dimen/dp1" />
+
+                <TextView
+                    android:id="@+id/tv_participants"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/px30"
+                    android:text=""
+                    android:textColor="@color/c_606266"
+                    tools:text="李晓、李红、王伊尔、梧桐\n,晓、李红、王伊尔、梧桐\n,晓、李红、王伊尔、梧桐\n"
+                    android:background="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp1">
+                <TextView
+                    android:layout_width="@dimen/px270"
+                    android:layout_height="match_parent"
+                    android:background="@color/c_F5F7FF"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/px30"
+                    android:paddingBottom="@dimen/px30"
+                    android:text="@string/summary_content"
+                    android:textColor="@color/c_303133"
+                    android:layout_marginRight="@dimen/dp1" />
+
+                <TextView
+                    android:id="@+id/tv_summary_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="left"
+                    android:paddingLeft="@dimen/px30"
+                    android:paddingBottom="@dimen/px16"
+                    android:paddingTop="@dimen/px16"
+                    android:text=""
+                    android:textColor="@color/c_606266"
+                    tools:text="我是纪要内容1.会议重点\n,我是纪要内容1.会议重点\n,,我是纪要内容1.会议重点我是纪要内容
+                    1.会议重点\n,我是纪要内容1.会议重点\n,,我是纪要内容1.会议重点"
+                    android:background="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp1">
+                <TextView
+                    android:layout_width="@dimen/px270"
+                    android:layout_height="match_parent"
+                    android:background="@color/c_F5F7FF"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/px30"
+                    android:paddingBottom="@dimen/px30"
+                    android:text="@string/attachment"
+                    android:textColor="@color/c_303133"
+                    android:layout_marginRight="@dimen/dp1" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"/>
-
+                    android:background="@color/white"
+                    android:paddingBottom="@dimen/space_10dp"/>
             </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 </LinearLayout>

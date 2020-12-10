@@ -62,10 +62,14 @@
                 android:hint="@string/login_hint"
                 android:paddingTop="@dimen/px24"
                 android:paddingBottom="@dimen/px24"
-                android:singleLine="true"
                 android:textColorHint="@color/bc"
                 android:textSize="@dimen/textSp8"
-                android:text="18311004536"/>
+                android:text=""
+                android:maxLength="11"
+                android:singleLine="true"
+                android:digits="1234567890"
+                android:inputType="phone|number"/>
+<!--            18311004536-->
 
             <ImageView
                 android:id="@+id/iv_clean"
@@ -107,7 +111,7 @@
 
             </RelativeLayout>
 
-            <TextView
+            <com.zkml.meetingtablecard.view.CountDownTextView
                 android:id="@+id/tv_get_msg_code"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

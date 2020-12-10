@@ -5,8 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -54,6 +57,7 @@ public class MeetingAgendaActivity extends AppCompatActivity implements Calendar
     private RecyclerView recyclerView;
     private List<AgendaItemBean> agendaList = new ArrayList<>();
     private AgendaItemAdapter adapter;
+    private LinearLayout llBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,13 @@ public class MeetingAgendaActivity extends AppCompatActivity implements Calendar
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AgendaItemAdapter(this, agendaList);
         recyclerView.setAdapter(adapter);
+        llBack = findViewById(R.id.ll_back);
+        llBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

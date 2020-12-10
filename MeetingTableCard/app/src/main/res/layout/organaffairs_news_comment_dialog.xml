@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_marginTop="@dimen/space_10dp"
-        android:background="@drawable/bt_download_bg"
+        android:background="@drawable/bt_send_bg"
         android:gravity="center"
         android:paddingLeft="@dimen/px42"
         android:paddingTop="@dimen/px15"

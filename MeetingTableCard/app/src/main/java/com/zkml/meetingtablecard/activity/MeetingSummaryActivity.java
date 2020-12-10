@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -48,11 +50,13 @@ public class MeetingSummaryActivity extends AppCompatActivity {
      */
     private TextView tvParticipants, tvSummaryContent;
     /**
-     *  附件列表
+     * 附件列表
      */
     private RecyclerView recyclerView;
     private List<AttachmentBean> attachmentList = new ArrayList<>();
     private AttachmentAdapter adapter;
+    private LinearLayout llBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //设置没有标题
@@ -87,7 +91,7 @@ public class MeetingSummaryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int pos) {
                 String url = attachmentList.get(pos).getUrl();
-                if (!StringUtils.isStrEmpty(url)){
+                if (!StringUtils.isStrEmpty(url)) {
                     Intent intent = new Intent(MeetingSummaryActivity.this, FileDisplayActivity.class);
                     intent.putExtra("fileUrl", url);
                     startActivity(intent);
@@ -95,6 +99,14 @@ public class MeetingSummaryActivity extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+
+        llBack = findViewById(R.id.ll_back);
+        llBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     /**
@@ -116,22 +128,24 @@ public class MeetingSummaryActivity extends AppCompatActivity {
                             String data = (String) resultMap.get("data");
                             if (!StringUtils.isStrEmpty(data)) {
                                 Map<String, Object> dataMap = StringUtils.transJsonToLinkedHashMap(data);
-                                String conferenceName = (String)dataMap.get("conferenceName");
+                                String conferenceName = (String) dataMap.get("conferenceName");
                                 tvMeetingName.setText(MyTextUtil.transEmptyToPlaceholder(conferenceName));
-                                String meetingTimes = (String)dataMap.get("meetingTimes");
+                                String meetingTimes = (String) dataMap.get("meetingTimes");
                                 tvDate.setText(MyTextUtil.transEmptyToPlaceholder(meetingTimes));
-                                String address = (String)dataMap.get("address");
+                                String address = (String) dataMap.get("address");
                                 tvMeetingLocation.setText(MyTextUtil.transEmptyToPlaceholder(address));
-                                String applyRealName = (String)dataMap.get("applyRealName");
+                                String applyRealName = (String) dataMap.get("applyRealName");
                                 tvUndertaker.setText(MyTextUtil.transEmptyToPlaceholder(applyRealName));
-                                String participants = (String)dataMap.get("participants");
+                                String participants = (String) dataMap.get("participants");
                                 // 参会人员
                                 setParticipants(participants);
                                 // 会议纪要
-                                String summaryContent = (String)dataMap.get("summaryContent");
-                                tvSummaryContent.setText(MyTextUtil.transEmptyToPlaceholder(summaryContent));
+                                String summaryContent = (String) dataMap.get("summaryContent");
+                                if (!StringUtils.isStrEmpty(summaryContent)) {
+                                    tvSummaryContent.setText(Html.fromHtml(summaryContent));
+                                }
                                 // 附件
-                                String attachment = (String)dataMap.get("attachment");
+                                String attachment = (String) dataMap.get("attachment");
                                 setAttachmentList(attachment);
                             } else {
                                 showCustomToast(getString(R.string.system_error_tip));
@@ -150,21 +164,23 @@ public class MeetingSummaryActivity extends AppCompatActivity {
             showCustomToast(getString(R.string.net_exception_tip));
         }
     }
-    private void setParticipants(String data){
+
+    private void setParticipants(String data) {
         String participantsAll = "";
         if (!StringUtils.isStrEmpty(data)) {
             TypeToken<List<ParticipantsBean>> typeToken = new TypeToken<List<ParticipantsBean>>() {
             };
             List<ParticipantsBean> modelBeanList = (List<ParticipantsBean>) StringUtils.convertMapToList(data, typeToken);
             if (modelBeanList != null && modelBeanList.size() > 0) {
-                for (int i=0; i < modelBeanList.size(); i++){
+                for (int i = 0; i < modelBeanList.size(); i++) {
                     participantsAll += modelBeanList.get(i).getRealName();
                 }
             }
         }
         tvParticipants.setText(MyTextUtil.transEmptyToPlaceholder(participantsAll));
     }
-    private void setAttachmentList(String data){
+
+    private void setAttachmentList(String data) {
         if (!StringUtils.isStrEmpty(data)) {
             TypeToken<List<AttachmentBean>> typeToken = new TypeToken<List<AttachmentBean>>() {
             };

@@ -88,4 +88,5 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
 
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5' // MQTT
+//    implementation 'com.zzhoujay.richtext:richtext:3.0.8'
 }

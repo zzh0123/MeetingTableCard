@@ -49,25 +49,25 @@ public class Constant {
 
 
     // 验证手机号
-    public static final String VALID_PHONE = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/validPhone";
+    public static final String VALID_PHONE = IPConfig.IPCONFIG + IPConfig.SERVER_NAME + "/elecTable/validPhone";
     // 发送短信验证码
-    public static final String GET_MSG_CODE = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/sendAuthCode";
+    public static final String GET_MSG_CODE = IPConfig.IPCONFIG + IPConfig.SERVER_NAME  + "/elecTable/sendAuthCode";
     // 登录接口
-    public static final String LOGIN = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/login";
+    public static final String LOGIN = IPConfig.IPCONFIG + IPConfig.SERVER_NAME + "/elecTable/login";
     // 获取当前登录人会议信息列表
-    public static final String GET_MEETING_LIST = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getMeetingApplyList";
+    public static final String GET_MEETING_LIST = IPConfig.IPCONFIG + IPConfig.SERVER_NAME  + "/elecTable/getMeetingApplyList";
     // 获取会议议程
-    public static final String GET_MEETING_AGENDA = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getMeetingAgenda";
+    public static final String GET_MEETING_AGENDA = IPConfig.IPCONFIG + IPConfig.SERVER_NAME  + "/elecTable/getMeetingAgenda";
     // 获取会议资料
-    public static final String GET_MEETING_MATERIALS = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getMeetingMaterials";
+    public static final String GET_MEETING_MATERIALS = IPConfig.IPCONFIG + IPConfig.SERVER_NAME  + "/elecTable/getMeetingMaterials";
     // 获取会议互动讨论列表
-    public static final String GET_COMMENT_LIST = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getApplyCommentList";
+    public static final String GET_COMMENT_LIST = IPConfig.IPCONFIG + IPConfig.SERVER_NAME  + "/elecTable/getApplyCommentList";
     // 点赞
-    public static final String GET_LIKE_COMMENT = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/likeComment";
+    public static final String GET_LIKE_COMMENT = IPConfig.IPCONFIG + IPConfig.SERVER_NAME  + "/elecTable/likeComment";
     // 取消点赞
-    public static final String GET_UNLIKE_COMMENT = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/unLikeComment";
+    public static final String GET_UNLIKE_COMMENT = IPConfig.IPCONFIG + IPConfig.SERVER_NAME  + "/elecTable/unLikeComment";
     // 发表互动聊天内容
-    public static final String GET_SEND_COMMENT = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/sendComment";
+    public static final String GET_SEND_COMMENT = IPConfig.IPCONFIG + IPConfig.SERVER_NAME  + "/elecTable/sendComment";
     // 获取会议纪要信息
-    public static final String GET_MEETING_SUMMARY = IPConfig.IPCONFIG + "/meeting-xw" + "/elecTable/getMeetingSummary";
+    public static final String GET_MEETING_SUMMARY = IPConfig.IPCONFIG + IPConfig.SERVER_NAME  + "/elecTable/getMeetingSummary";
 }

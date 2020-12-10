@@ -76,6 +76,7 @@
     <string name="meeting_unit">承办单位: </string>
     <string name="meeting_location">会议地点: </string>
     <string name="meeting_under_taker">承办人: </string>
+    <string name="meeting_under_taker1">承办人</string>
     <string name="choose_start_date">请选择起始日期</string>
     <string name="choose_end_date">请选择结束日期</string>
     <string name="search">查询</string>
@@ -88,6 +89,9 @@
     <string name="summary">会议纪要</string>
     <string name="download">下载附件</string>
     <string name="download_fail">下载附件失败！</string>
+    <string name="participants">参会人员</string>
+    <string name="summary_content">纪要内容</string>
+    <string name="attachment">附件</string>
 
     <string-array name="chinese_week_string_array">
         <item>周日</item>

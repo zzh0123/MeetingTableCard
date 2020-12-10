@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.gson.reflect.TypeToken;
@@ -67,6 +68,7 @@ public class DiscussActivity extends AppCompatActivity {
     private String meetingApplyId, userId, commentId, comment;
     private RelativeLayout relativeLayout;
     private CommentDialog dialog;
+    private LinearLayout llBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +116,14 @@ public class DiscussActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
+        llBack = findViewById(R.id.ll_back);
+        llBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         dialog.setOnCommitListener(new CommentDialog.OnCommitListener() {
             @Override
             public void onCommit(EditText et, View v) {

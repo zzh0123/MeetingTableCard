@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_back"
             android:layout_width="match_parent"
             android:layout_height="@dimen/px104"
             android:background="@color/c_3D358F"

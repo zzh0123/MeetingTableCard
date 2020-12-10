@@ -33,16 +33,19 @@ import com.zkml.meetingtablecard.utils.ToastUtils;
 import com.zkml.meetingtablecard.utils.asynctask.HttpGetAsyncTask;
 import com.zkml.meetingtablecard.utils.asynctask.HttpPostAsyncTask;
 import com.zkml.meetingtablecard.utils.cache.StringUtils;
+import com.zkml.meetingtablecard.view.CountDownTextView;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author: zzh
  * data : 2020/12/02
  * description：登录界面
  */
-public class LoginActivity1 extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener{
+public class LoginActivity1 extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     /**
      * 手机号
@@ -52,7 +55,11 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
     /**
      * 登录
      */
-    private TextView tvLogin, tvGetAuthCode;
+    private TextView tvLogin;
+    /**
+     * 验证码
+     */
+    private CountDownTextView tvGetAuthCode;
     private String phone, authCode;
 
     @Override
@@ -66,6 +73,7 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_login1);
         ActivityManager.getInstance().addActivity(this);
         initView();
+        initEvent();
         inputInit();
     }
 
@@ -77,29 +85,67 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
         etAuthCode = (EditText) findViewById(R.id.et_auth_code);
         etPhone.setOnFocusChangeListener(this);
         tvLogin = (TextView) findViewById(R.id.tv_login);
-        tvGetAuthCode = (TextView) findViewById(R.id.tv_get_msg_code);
-        tvGetAuthCode.setOnClickListener(this);
-        tvLogin.setOnClickListener(this);
-
-        tvLogin.setClickable(false);
-        tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
+        tvGetAuthCode = (CountDownTextView) findViewById(R.id.tv_get_msg_code);
 
         //输入框右侧操作
         ivClean = (ImageView) findViewById(R.id.iv_clean);
-        ivClean.setOnClickListener(this);
         ivLoginOut = (ImageView) findViewById(R.id.iv_login_out);
+    }
+
+    private void initEvent() {
+        tvGetAuthCode.setOnClickListener(this);
+        tvLogin.setOnClickListener(this);
+        tvLogin.setClickable(false);
+        tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
+
+        ivClean.setOnClickListener(this);
         ivLoginOut.setOnClickListener(this);
+
+        tvGetAuthCode
+                .setNormalText(getString(R.string.login_msg_code))
+                .setCountDownText("", " s")
+                .setCloseKeepCountDown(false)//关闭页面保持倒计时开关
+                .setCountDownClickable(false)//倒计时期间点击事件是否生效开关
+                .setShowFormatTime(false)//是否格式化时间
+                .setIntervalUnit(TimeUnit.SECONDS)
+                .setOnCountDownStartListener(new CountDownTextView.OnCountDownStartListener() {
+                    @Override
+                    public void onStart() {
+//                        Toast.makeText(VerificationCodeActivity.this, "开始计时", Toast.LENGTH_SHORT).show();
+                        tvGetAuthCode.setTextColor(getResources().getColor(R.color.c7));
+                        tvGetAuthCode.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
+                    }
+                })
+                .setOnCountDownTickListener(new CountDownTextView.OnCountDownTickListener() {
+                    @Override
+                    public void onTick(long untilFinished) {
+                        LogUtil.i("------", "onTick: " + untilFinished);
+                    }
+                })
+                .setOnCountDownFinishListener(new CountDownTextView.OnCountDownFinishListener() {
+                    @Override
+                    public void onFinish() {
+//                        Toast.makeText(VerificationCodeActivity.this, "倒计时完毕", Toast.LENGTH_SHORT).show();
+                        tvGetAuthCode.setTextColor(getResources().getColor(R.color.white));
+                        tvGetAuthCode.setBackgroundResource(R.drawable.msg_code_bt_bg);
+                    }
+                })
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        Toast.makeText(VerificationCodeActivity.this, "短信已发送", Toast.LENGTH_SHORT).show();
+                        LogUtil.i("zzz1", "OnClick getcode ");
+                        validPhone();
+                    }
+                });
     }
 
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.tv_get_msg_code) { // 获取短信验证码
-            validPhone();
-//            getAuthCode();
-        }else if (i == R.id.tv_login) { // 登录
+        if (i == R.id.tv_login) { // 登录
             login();
-        } else if (i == R.id.name_clean) { ;
+        } else if (i == R.id.name_clean) {
             etPhone.setText("");
             etPhone.setFocusable(true);
             etPhone.setFocusableInTouchMode(true);
@@ -132,12 +178,13 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
                 } else {
                     ivClean.setVisibility(View.VISIBLE);
                 }
-                if (StringUtils.isStrEmpty(phone) || StringUtils.isStrEmpty(authCode)){
-                    tvLogin.setClickable(false);
-                    tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
-                } else {
+
+                if (!StringUtils.isStrEmpty(authCode) && (phone.trim().length() == 11)) {
                     tvLogin.setClickable(true);
                     tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg);
+                } else {
+                    tvLogin.setClickable(false);
+                    tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
                 }
             }
         });
@@ -156,12 +203,12 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable s) {
                 authCode = s.toString();
-                if (StringUtils.isStrEmpty(phone) || StringUtils.isStrEmpty(authCode)){
-                    tvLogin.setClickable(false);
-                    tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
-                } else {
+                if (!StringUtils.isStrEmpty(authCode) && (phone.trim().length() == 11)) {
                     tvLogin.setClickable(true);
                     tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg);
+                } else {
+                    tvLogin.setClickable(false);
+                    tvLogin.setBackgroundResource(R.drawable.msg_code_bt_bg_grey);
                 }
             }
         });
@@ -175,9 +222,9 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
     /**
      * 验证手机号
      */
-    private void validPhone(){
+    private void validPhone() {
         phone = etPhone.getText().toString().trim();
-        if (StringUtils.isStrEmpty(phone)){
+        if (StringUtils.isStrEmpty(phone)) {
             showCustomToast(getString(R.string.phone_empty_tip));
             return;
         }
@@ -195,15 +242,16 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
                         String result = (String) resultMap.get("success");
                         String message = (String) resultMap.get("message");
                         if (!StringUtils.isStrEmpty(result) && "true".equals(result)) {
+                            tvGetAuthCode.startCountDown(60);
                             getAuthCode();
-                        }else {
+                        } else {
                             if (!StringUtils.isStrEmpty(message)) {
                                 showCustomToast(message);
                             } else {
                                 showCustomToast(getString(R.string.system_error_tip));
                             }
                         }
-                    }else {
+                    } else {
                         showCustomToast(getString(R.string.system_error_tip));
                     }
                 }
@@ -218,9 +266,9 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
     /**
      * 获取短信验证码
      */
-    private void getAuthCode(){
-        phone =  etPhone.getText().toString().trim();
-        if (StringUtils.isStrEmpty(phone)){
+    private void getAuthCode() {
+        phone = etPhone.getText().toString().trim();
+        if (StringUtils.isStrEmpty(phone)) {
             showCustomToast(getString(R.string.phone_empty_tip));
             return;
         }
@@ -239,14 +287,14 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
                         String message = (String) resultMap.get("message");
                         if (!StringUtils.isStrEmpty(result) && "true".equals(result)) {
                             showCustomToast(getString(R.string.msg_code_get_success));
-                        }else {
+                        } else {
                             if (!StringUtils.isStrEmpty(message)) {
                                 showCustomToast(message);
                             } else {
                                 showCustomToast(getString(R.string.system_error_tip));
                             }
                         }
-                    }else {
+                    } else {
                         showCustomToast(getString(R.string.system_error_tip));
                     }
                 }
@@ -314,10 +362,10 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
                                     editor.commit();
                                     Intent intent = new Intent(LoginActivity1.this, MeetingListActivity.class);
                                     startActivity(intent);
-                                }else {
+                                } else {
                                     showCustomToast(getString(R.string.system_error_tip));
                                 }
-                            }else {
+                            } else {
                                 showCustomToast(getString(R.string.system_error_tip));
                             }
                         } else {
