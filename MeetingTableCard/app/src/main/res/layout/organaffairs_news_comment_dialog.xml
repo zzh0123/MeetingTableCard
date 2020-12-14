@@ -25,7 +25,8 @@
         android:paddingBottom="@dimen/space_10dp"
         android:textColor="@color/C7"
         android:textColorHint="@color/C9"
-        android:textSize="@dimen/weibao_textsize3" />
+        android:textSize="@dimen/weibao_textsize3"
+        android:textCursorDrawable="@drawable/cursor_black"/>
 
     <TextView
         android:id="@+id/tv_send_comment"

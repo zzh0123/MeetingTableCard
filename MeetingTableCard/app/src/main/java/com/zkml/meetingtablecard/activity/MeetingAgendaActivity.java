@@ -16,12 +16,17 @@ import com.google.gson.reflect.TypeToken;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 import com.zkml.meetingtablecard.R;
+import com.zkml.meetingtablecard.adapter.AgendaDateAdapter;
 import com.zkml.meetingtablecard.adapter.AgendaItemAdapter;
+import com.zkml.meetingtablecard.bean.AgendaDateBean;
 import com.zkml.meetingtablecard.bean.AgendaItemBean;
 import com.zkml.meetingtablecard.constant.Constant;
 import com.zkml.meetingtablecard.utils.ActivityManager;
+import com.zkml.meetingtablecard.utils.DateUtils;
+import com.zkml.meetingtablecard.utils.LogUtil;
 import com.zkml.meetingtablecard.utils.NetworkDetector;
 import com.zkml.meetingtablecard.utils.ToastUtils;
+import com.zkml.meetingtablecard.utils.Utils;
 import com.zkml.meetingtablecard.utils.asynctask.HttpGetAsyncTask;
 import com.zkml.meetingtablecard.utils.cache.StringUtils;
 
@@ -37,27 +42,27 @@ import java.util.Map;
  * data : 2020/12/04
  * description：会议议程
  */
-public class MeetingAgendaActivity extends AppCompatActivity implements CalendarView.OnCalendarSelectListener, CalendarView.OnMonthChangeListener {
+public class MeetingAgendaActivity extends AppCompatActivity {
 
-    private CalendarView mCalendarView;
-    /**
-     * 当前日历所显示的年月日
-     */
-    private int mYear;
-    private int mMonth;
-    private int mDay;
     /**
      * 会议id, 日期
      */
-    private TextView etMeetingName, tvStartDate, tvEndDate;
-    private String meetingApplyId, meetingDate;
+    private String meetingApplyId, meetingDate = "";
     /**
      * 会议信息列表
      */
     private RecyclerView recyclerView;
     private List<AgendaItemBean> agendaList = new ArrayList<>();
+    private List<AgendaItemBean> agendaListDay = new ArrayList<>();
     private AgendaItemAdapter adapter;
     private LinearLayout llBack;
+    /**
+     * 日期列表
+     */
+    private RecyclerView recyclerViewDate;
+    private List<AgendaDateBean> dateList = new ArrayList<>();
+    private AgendaDateAdapter dateAdapter;
+    private String monthDay = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,8 @@ public class MeetingAgendaActivity extends AppCompatActivity implements Calendar
         setContentView(R.layout.activity_meeting_agenda);
         ActivityManager.getInstance().addActivity(this);
         initView();
+        initEvent();
+        getMeetingAgenda();
     }
 
     /**
@@ -77,65 +84,54 @@ public class MeetingAgendaActivity extends AppCompatActivity implements Calendar
      */
     private void initView() {
         meetingApplyId = getIntent().getStringExtra("meetingApplyId");
-        // 日历
-        mCalendarView = findViewById(R.id.calendar_view);
-        mCalendarView.setOnCalendarSelectListener(this);
-        mCalendarView.setOnMonthChangeListener(this);
-        mCalendarView.scrollToCurrent();
-
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AgendaItemAdapter(this, agendaList);
+        adapter = new AgendaItemAdapter(this, agendaListDay);
         recyclerView.setAdapter(adapter);
+
+        // 日期横向列表
+        recyclerViewDate = findViewById(R.id.recyclerView_date);
+        recyclerViewDate.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerViewDate.setLayoutManager(layoutManager);
+        dateAdapter = new AgendaDateAdapter(this, dateList);
+        recyclerViewDate.setAdapter(dateAdapter);
+
         llBack = findViewById(R.id.ll_back);
+    }
+
+    private void initEvent() {
         llBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        dateAdapter.setOnItemClickListener(new AgendaDateAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int pos) {
+                setSelectDay(pos);
+            }
+        });
     }
 
-    @Override
-    public void onCalendarOutOfRange(Calendar calendar) {
-
-    }
-
-    private Calendar getSchemeCalendar(int year, int month, int day, int color, String text) {
-        Calendar calendar = new Calendar();
-        calendar.setYear(year);
-        calendar.setMonth(month);
-        calendar.setDay(day);
-        //如果单独标记颜色、则会使用这个颜色
-        calendar.setSchemeColor(color);
-        calendar.setScheme(text);
-        return calendar;
-    }
-
-    @Override
-    public void onCalendarSelect(Calendar calendar, boolean isClick) {
-        int year = calendar.getYear();
-        int month = calendar.getMonth();
-        int day = calendar.getDay();
-        meetingDate = "" + year + "-" + month + "-" + day; // yyyy-MM-dd
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = sdf.parse(meetingDate); //将字符型转换成日期型
-            meetingDate = sdf.format(date);
-        } catch (Exception e) {
+    private void setSelectDay(int pos){
+        for (int i = 0; i < dateList.size(); i++){
+            dateList.get(i).setSelected(false);
         }
-
-        getMeetingAgenda();
-    }
-
-    /**
-     * 滑动日历切换月份
-     */
-    @Override
-    public void onMonthChange(int year, int month) {
-        mYear = year;
-        mMonth = month;
+        dateList.get(pos).setSelected(true);
+        String monthDay = dateList.get(pos).getMonthDay();
+        LogUtil.i("zzz1", "sel monthDay " + monthDay);
+        agendaListDay.clear();
+        for (int i = 0; i < agendaList.size(); i++){
+            if (agendaList.get(i).getBeginTime().contains(monthDay)){
+                agendaListDay.add(agendaList.get(i));
+            }
+        }
+        dateAdapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -153,6 +149,8 @@ public class MeetingAgendaActivity extends AppCompatActivity implements Calendar
                 @Override
                 public void reqGetComplete(Map<String, Object> resultMap) {
                     if (null != resultMap) {
+//                        String resultStr = Utils.readAssert(MeetingAgendaActivity.this, "test1.txt");
+//                        resultMap = StringUtils.transResultJsonToMap(resultStr);
                         String success = (String) resultMap.get("success");
                         if ("true".equals(success)) {
                             String data = (String) resultMap.get("data");
@@ -163,8 +161,10 @@ public class MeetingAgendaActivity extends AppCompatActivity implements Calendar
                                 List<AgendaItemBean> modelBeanList = (List<AgendaItemBean>) StringUtils.convertMapToList(data, typeToken);
                                 if (modelBeanList != null && modelBeanList.size() > 0) {
                                     agendaList.addAll(modelBeanList);
+                                    setDateList(agendaList);
                                 }
                                 adapter.notifyDataSetChanged();
+                                dateAdapter.notifyDataSetChanged();
                             } else {
                                 showCustomToast(getString(R.string.system_error_tip));
                             }
@@ -181,6 +181,23 @@ public class MeetingAgendaActivity extends AppCompatActivity implements Calendar
         } else {
             showCustomToast(getString(R.string.net_exception_tip));
         }
+    }
+
+    private void setDateList(List<AgendaItemBean> agendaList){
+        AgendaItemBean agendaBean = null;
+        for (int i = 0; i < agendaList.size(); i++){
+            agendaBean = agendaList.get(i);
+            if (DateUtils.getMonthDay(agendaBean.getBeginTime()).equals(monthDay)){
+            } else {
+                AgendaDateBean dateBean = new AgendaDateBean();
+                dateBean.setWeek(DateUtils.getWeek(agendaBean.getBeginTime()));
+                monthDay = DateUtils.getMonthDay(agendaBean.getBeginTime());
+                dateBean.setMonthDay(DateUtils.getMonthDay(agendaBean.getBeginTime()));
+                dateList.add(dateBean);
+            }
+        }
+        dateList.get(0).setSelected(true);
+        setSelectDay(0);
     }
 
     public void showCustomToast(String pMsg) {

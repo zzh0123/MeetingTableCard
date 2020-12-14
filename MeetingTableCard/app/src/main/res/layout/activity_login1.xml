@@ -68,8 +68,8 @@
                 android:maxLength="11"
                 android:singleLine="true"
                 android:digits="1234567890"
-                android:inputType="phone|number"/>
-<!--            18311004536-->
+                android:inputType="phone|number"
+                android:textCursorDrawable="@drawable/cursor_black"/>
 
             <ImageView
                 android:id="@+id/iv_clean"
@@ -107,7 +107,8 @@
                     android:paddingBottom="@dimen/px24"
                     android:singleLine="true"
                     android:textColorHint="@color/bc"
-                    android:textSize="@dimen/textSp8" />
+                    android:textSize="@dimen/textSp8"
+                    android:textCursorDrawable="@drawable/cursor_black"/>
 
             </RelativeLayout>
 

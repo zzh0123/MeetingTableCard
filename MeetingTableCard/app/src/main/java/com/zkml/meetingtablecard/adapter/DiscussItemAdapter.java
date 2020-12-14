@@ -69,7 +69,7 @@ public class DiscussItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        if (discussList.get(position).getUserId().equals(userId)) {
+        if (discussList.get(position).getSelfFlag()) {
             return MY;
         } else {
             return OTHER;
@@ -104,9 +104,9 @@ public class DiscussItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 }
                 boolean currentLikeFlag = bean.getCurrentLikeFlag();
                 if (currentLikeFlag){
-                    myViewHolder.ivLike.setImageResource(R.mipmap.like_my1);
+                    myViewHolder.ivLike.setImageResource(R.mipmap.like1);
                 } else {
-                    myViewHolder.ivLike.setImageResource(R.mipmap.like_my);
+                    myViewHolder.ivLike.setImageResource(R.mipmap.like);
                 }
                 String id = bean.getId();
                 myViewHolder.llLike.setOnClickListener(new View.OnClickListener() {

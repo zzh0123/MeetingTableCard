@@ -283,7 +283,6 @@ public class HttpConnUtils {
             String token = sharedPreferences.getString("token", "");
             String appChannel = sharedPreferences.getString("appChannel", "");
             String authId = sharedPreferences.getString("auth_id", "");
-            LogUtil.i("zzz1", "token http " + token);
             String image = "";
             String pay = "";
             if (map != null) {
@@ -362,6 +361,7 @@ public class HttpConnUtils {
                 }
             }
             LogUtil.i("zzz1", "-----------请求参数------------" + json);
+            LogUtil.i("zzz1", "token http " + token);
             //请求头信息
             HttpHeaders headers = new HttpHeaders();
             headers.put("Authorization", token);

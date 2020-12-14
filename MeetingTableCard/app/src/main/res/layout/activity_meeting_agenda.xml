@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.MeetingAgendaActivity">
+    tools:context=".activity.MeetingAgendaActivity"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/ll_back"
@@ -33,45 +34,10 @@
             tools:text="会议议程" />
     </LinearLayout>
 
-    <com.haibin.calendarview.CalendarLayout
-        android:id="@+id/calendarLayout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/c_5368C1"
-        android:orientation="vertical"
-        app:calendar_show_mode="both_month_week_view"
-        app:default_status="shrink">
-
-        <com.haibin.calendarview.CalendarView
-            android:id="@+id/calendar_view"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/white"
-            app:current_day_text_color="@color/c7"
-            app:current_month_text_color="@color/c8"
-            app:day_text_size="9sp"
-            app:lunar_text_size="0sp"
-            app:month_view="com.zkml.meetingtablecard.view.calendar.MeiZuMonthView"
-            app:month_view_show_mode="mode_only_current"
-            app:other_month_text_color="@color/c_5368C1"
-            app:scheme_text="假"
-            app:scheme_text_color="@color/c8"
-            app:scheme_theme_color="@color/c8"
-            app:select_mode="single_mode"
-            app:selected_text_color="@color/white"
-            app:selected_theme_color="@color/c_5368C1"
-            app:week_bar_view="com.zkml.meetingtablecard.view.calendar.CustomWeekBar"
-            app:week_background="@color/c_5368C1"
-            app:week_text_color="@color/white"
-            app:year_view_week_text_size="9sp"
-            app:week_bar_height="20dp"
-            app:week_line_background="#00000000"
-            app:week_line_margin="16dp"
-            app:week_start_with="mon"
-            app:week_text_size="9sp"
-            app:week_view="com.zkml.meetingtablecard.view.calendar.MeizuWeekView" />
-
-    </com.haibin.calendarview.CalendarLayout>
+        android:layout_height="@dimen/px119" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

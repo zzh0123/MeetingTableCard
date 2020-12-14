@@ -1266,4 +1266,69 @@ public class DateUtils {
         }
         return timeString;
     }
+
+    public static String getMonthDay(String dateTime) {
+        String monthDay = "";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        try {
+            date = format.parse(dateTime);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            monthDay = "" + (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return monthDay;
+    }
+
+    public static int getDayofWeek(String dateTime) {
+
+        Calendar cal = Calendar.getInstance();
+        if (dateTime.equals("")) {
+            cal.setTime(new Date(System.currentTimeMillis()));
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            Date date;
+            try {
+                date = sdf.parse(dateTime);
+            } catch (ParseException e) {
+                date = null;
+                e.printStackTrace();
+            }
+            if (date != null) {
+                cal.setTime(new Date(date.getTime()));
+            }
+        }
+        return cal.get(Calendar.DAY_OF_WEEK);
+    }
+
+
+    public static String getWeek(String dateTime) {
+        String week = "";
+        switch (getDayofWeek(dateTime)) {
+            case 1:
+                week = "周日";
+                break;
+            case 2:
+                week = "周一";
+                break;
+            case 3:
+                week = "周二";
+                break;
+            case 4:
+                week = "周三";
+                break;
+            case 5:
+                week = "周四";
+                break;
+            case 6:
+                week = "周五";
+                break;
+            case 7:
+                week = "周六";
+                break;
+        }
+        return week;
+    }
 }

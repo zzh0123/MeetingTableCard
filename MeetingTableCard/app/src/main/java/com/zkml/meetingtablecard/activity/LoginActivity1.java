@@ -119,7 +119,7 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
                 .setOnCountDownTickListener(new CountDownTextView.OnCountDownTickListener() {
                     @Override
                     public void onTick(long untilFinished) {
-                        LogUtil.i("------", "onTick: " + untilFinished);
+//                        LogUtil.i("------", "onTick: " + untilFinished);
                     }
                 })
                 .setOnCountDownFinishListener(new CountDownTextView.OnCountDownFinishListener() {
@@ -339,6 +339,7 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
             SharedPreferences sharedPreferences = ActivityUtils.selSharedPreferencesData(LoginActivity1.this, MyApplication.USER_INFO_NAME);
             final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.remove("token");
+            editor.remove("userId");
             editor.commit();
             Map<String, String> reqParamMap = new HashMap<>();
             reqParamMap.put("phone", phone);
@@ -356,12 +357,16 @@ public class LoginActivity1 extends AppCompatActivity implements View.OnClickLis
                                 Map<String, Object> dataMap = StringUtils.transJsonToMap(data);
                                 String token = (String) dataMap.get("token");
                                 String userId = (String) dataMap.get("userId");
+                                String name = (String) dataMap.get("name");
                                 if (!StringUtils.isStrEmpty(token) && !StringUtils.isStrEmpty(userId)) {
                                     editor.putString("token", token);
                                     editor.putString("userId", userId);
+//                                    editor.putString("name", name);
                                     editor.commit();
                                     Intent intent = new Intent(LoginActivity1.this, MeetingListActivity.class);
+                                    intent.putExtra("name", name);
                                     startActivity(intent);
+                                    finish();
                                 } else {
                                     showCustomToast(getString(R.string.system_error_tip));
                                 }

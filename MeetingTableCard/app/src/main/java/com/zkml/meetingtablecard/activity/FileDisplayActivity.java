@@ -68,7 +68,7 @@ public class FileDisplayActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = this.getIntent();
+//        Intent intent = this.getIntent();
 //        String path = (String) intent.getSerializableExtra("path");
         fileUrl = getIntent().getStringExtra("fileUrl");
 

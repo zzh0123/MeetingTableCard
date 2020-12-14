@@ -12,13 +12,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.j256.ormlite.stmt.query.In;
 import com.zkml.meetingtablecard.R;
 import com.zkml.meetingtablecard.adapter.HomeItemAdapter;
 import com.zkml.meetingtablecard.bean.HomeItemBean;
 import com.zkml.meetingtablecard.bean.MeetingItemBean;
 import com.zkml.meetingtablecard.utils.ActivityManager;
-import com.zkml.meetingtablecard.utils.LogUtil;
 import com.zkml.meetingtablecard.utils.MyTextUtil;
 import com.zkml.meetingtablecard.utils.cache.StringUtils;
 
@@ -41,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private TextView tvMeetingName;
     private String meetingApplyId;
-    private ImageView ivLoginOut;
+    private ImageView ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +79,11 @@ public class HomeActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
-        ivLoginOut = (ImageView) findViewById(R.id.iv_login_out);
-        ivLoginOut.setOnClickListener(new View.OnClickListener() {
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManager.getInstance().exit();
+                finish();
             }
         });
     }

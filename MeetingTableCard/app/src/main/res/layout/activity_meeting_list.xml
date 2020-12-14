@@ -11,13 +11,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/px104"
+        android:background="@drawable/login_center_bg"
         android:paddingLeft="@dimen/space_10dp"
         android:paddingTop="@dimen/dp11_5"
         android:paddingRight="@dimen/space_10dp"
-        android:paddingBottom="@dimen/dp11_5"
-        android:background="@drawable/login_center_bg">
+        android:paddingBottom="@dimen/dp11_5">
 
         <TextView
+            android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -40,11 +41,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/px104"
         android:layout_margin="@dimen/space_10dp"
+        android:background="@drawable/meeting_item_bg"
         android:paddingLeft="@dimen/space_10dp"
         android:paddingTop="@dimen/dp7_5"
         android:paddingRight="@dimen/space_10dp"
-        android:paddingBottom="@dimen/dp7_5"
-        android:background="@drawable/meeting_item_bg">
+        android:paddingBottom="@dimen/dp7_5">
 
         <TextView
             android:id="@+id/tv_meeting_name"
@@ -64,12 +65,13 @@
             android:layout_toRightOf="@+id/tv_meeting_name"
             android:background="@drawable/meeting_search_bg"
             android:hint="@string/meeting_name_hint"
-            android:text=""
             android:padding="@dimen/px14"
             android:singleLine="true"
+            android:text=""
             android:textColor="@color/white"
             android:textColorHint="@color/bc"
-            android:textSize="@dimen/textSp8" />
+            android:textSize="@dimen/textSp8"
+            android:textCursorDrawable="@drawable/cursor_black"/>
 
         <TextView
             android:id="@+id/tv_meeting_date"
@@ -95,9 +97,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:hint="@string/choose_start_date"
+                android:textColorHint="@color/white"
                 android:padding="@dimen/px14"
                 android:text=""
-                android:hint="@string/choose_start_date"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSp7" />
 
@@ -134,10 +137,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/px14"
                 android:hint="@string/choose_end_date"
+                android:padding="@dimen/px14"
                 android:textColor="@color/white"
-                android:textSize="@dimen/textSp7" />
+                android:textSize="@dimen/textSp7"
+                android:textColorHint="@color/white"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -174,10 +178,25 @@
             android:background="@color/c_E4E7ED" />
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/space_10dp"
-        android:layout_marginRight="@dimen/space_10dp" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_no_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_date"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textT2"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/space_10dp"
+            android:layout_marginRight="@dimen/space_10dp" />
+    </FrameLayout>
 </LinearLayout>

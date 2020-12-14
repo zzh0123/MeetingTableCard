@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MeetingTableCard</string>
+    <string name="app_name">智能桌牌</string>
 
     <string name="loading">加载中...</string>
     <string name="net_exception_tip">网络不给力，请检查网络设置！</string>
@@ -92,6 +92,11 @@
     <string name="participants">参会人员</string>
     <string name="summary_content">纪要内容</string>
     <string name="attachment">附件</string>
+    <string name="welcome">欢迎您,</string>
+    <string name="welcome1">欢迎您</string>
+    <string name="no_date">暂无数据</string>
+    <string name="select_time_over_end">选择的时间不能大于结束时间</string>
+    <string name="select_time_before_start">选择的时间不能小于开始时间</string>
 
     <string-array name="chinese_week_string_array">
         <item>周日</item>

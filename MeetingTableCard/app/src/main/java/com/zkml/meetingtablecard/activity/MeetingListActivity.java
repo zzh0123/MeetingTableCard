@@ -5,23 +5,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.zkml.meetingtablecard.R;
 import com.zkml.meetingtablecard.adapter.MeetingItemAdapter;
+import com.zkml.meetingtablecard.application.MyApplication;
 import com.zkml.meetingtablecard.bean.MeetingItemBean;
 import com.zkml.meetingtablecard.constant.Constant;
 import com.zkml.meetingtablecard.utils.ActivityManager;
+import com.zkml.meetingtablecard.utils.ActivityUtils;
 import com.zkml.meetingtablecard.utils.DateUtils;
 import com.zkml.meetingtablecard.utils.JsonUtil;
 import com.zkml.meetingtablecard.utils.LogUtil;
+import com.zkml.meetingtablecard.utils.MyTextUtil;
 import com.zkml.meetingtablecard.utils.NetworkDetector;
 import com.zkml.meetingtablecard.utils.ToastUtils;
 import com.zkml.meetingtablecard.utils.asynctask.HttpPostAsyncTask;
@@ -42,13 +49,17 @@ import java.util.Map;
  * description：会议信息列表界面
  */
 public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener,
-        DateHHMMSelectView.OnTimePickListener{
+        DateHHMMSelectView.OnTimePickListener {
 
     /**
      * 会议开始日期，结束日期，名称
      */
-    private TextView etMeetingName, tvStartDate, tvEndDate;
-    private String conferenceName, beginDate, endDate;
+    private TextView tvStartDate, tvEndDate, tvUserName, tvNoDate;
+    /**
+     * 会议开始日期，结束日期，名称
+     */
+    private EditText etMeetingName;
+    private String conferenceName, beginDate, endDate, name;
     private RelativeLayout rlStartDate, rlEndDate;
     /**
      * 查询
@@ -94,7 +105,15 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
      */
     private void initView() {
         calendar = Calendar.getInstance();
-        etMeetingName = (TextView) findViewById(R.id.et_meeting_name);
+        name = getIntent().getStringExtra("name");
+        tvUserName = (TextView) findViewById(R.id.tv_user_name);
+        tvUserName.setText(getString(R.string.welcome) + MyTextUtil.transEmptyToPlaceholder(name));
+        if (!StringUtils.isStrEmpty(name)) {
+            tvUserName.setText(getString(R.string.welcome) + name);
+        } else {
+            tvUserName.setText(getString(R.string.welcome1));
+        }
+        etMeetingName = (EditText) findViewById(R.id.et_meeting_name);
         tvStartDate = (TextView) findViewById(R.id.tv_start_date);
         tvEndDate = (TextView) findViewById(R.id.tv_end_date);
         rlStartDate = (RelativeLayout) findViewById(R.id.rl_start_date);
@@ -106,10 +125,11 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ivLoginOut = (ImageView) findViewById(R.id.iv_login_out);
-        ivLoginOut.setOnClickListener(this);
+        tvNoDate = (TextView) findViewById(R.id.tv_no_date);
     }
 
     private void initEvent() {
+        ivLoginOut.setOnClickListener(this);
         rlStartDate.setOnClickListener(this);
         rlEndDate.setOnClickListener(this);
         tvSearch.setOnClickListener(this);
@@ -118,9 +138,9 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onItemClick(View view, int pos) {
                 MeetingItemBean itemBean = meetingList.get(pos);
-                if (itemBean != null){
+                if (itemBean != null) {
                     Intent intent = new Intent(MeetingListActivity.this, HomeActivity.class);
-                    intent.putExtra("itemBean",itemBean);
+                    intent.putExtra("itemBean", itemBean);
                     startActivity(intent);
                 }
             }
@@ -134,10 +154,12 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         int i = v.getId();
         if (i == R.id.tv_search) { // 查询
             getMeetingList();
-        } else if (i == R.id.rl_start_date) { ;
+        } else if (i == R.id.rl_start_date) {
+            ;
             //时间选择器
             chooseBuyCarTime(true);
-        } else if (i == R.id.rl_end_date) { ;
+        } else if (i == R.id.rl_end_date) {
+            ;
             //时间选择器
             chooseBuyCarTime(false);
         } else if (i == R.id.iv_login_out) { // 退出
@@ -149,7 +171,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
      * 选择保养时间
      */
     private void chooseBuyCarTime(boolean isStart) {
-        DateHHMMSelectView  mTimePickerDialog = null;
+        DateHHMMSelectView mTimePickerDialog = null;
         mTimePickerDialog = new DateHHMMSelectView(this, calendar.get(Calendar.YEAR) - 30);
         mTimePickerDialog.setDialogMode(DateSelectView.DIALOG_MODE_BOTTOM);
         mTimePickerDialog.setTimePickListener(this);
@@ -173,29 +195,49 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         mMin = minute;
         String date = mYear + "-" + mMonth + "-" + mDay + " " + mHour + ":" + mMin;
         String mTimeStr = DateUtils.getTimeFormat("yyyy-MM-dd HH:mm:ss", DateUtils.getDateFromString2(date));
-        String mTimeNowStr = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1)
-                + "-" + calendar.get(Calendar.DAY_OF_MONTH) + " " + calendar.get(Calendar.HOUR_OF_DAY)
-                + ":"+ calendar.get(Calendar.MINUTE);
-        Date dateSelect = DateUtils.getDateFromString(mTimeStr, "yyyy-MM-dd HH:mm");
-        Date dateNow = DateUtils.getDateFromString(mTimeNowStr, "yyyy-MM-dd HH:mm");
+//        String mTimeNowStr = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1)
+//                + "-" + calendar.get(Calendar.DAY_OF_MONTH) + " " + calendar.get(Calendar.HOUR_OF_DAY)
+//                + ":"+ calendar.get(Calendar.MINUTE);
 
-        if (dateSelect != null && dateNow != null) {
-            if (dateSelect.getTime() > dateNow.getTime()) {
-                showCustomToast(getResources().getString(R.string.assets_select_time_over_now));
-                return;
-            }
-        } else {
+        // Date dateNow = DateUtils.getDateFromString(mTimeNowStr, "yyyy-MM-dd HH:mm");
+
+        if (StringUtils.isStrEmpty(mTimeStr)) {
             showCustomToast(getResources().getString(R.string.assets_select_time_failure));
             return;
         }
-        if (isSart){
+
+        if (isSart) {
             LogUtil.i("zzz1", "beginDate--->  " + mTimeStr);
-            beginDate = mTimeStr;
-            tvStartDate.setText(beginDate);
+            if (!StringUtils.isStrEmpty(endDate)) {
+                Date endTime = DateUtils.getDateFromString(endDate, "yyyy-MM-dd HH:mm");
+                Date dateSelect = DateUtils.getDateFromString(mTimeStr, "yyyy-MM-dd HH:mm");
+                if (dateSelect.getTime() >= endTime.getTime()) {
+                    showCustomToast(getResources().getString(R.string.select_time_over_end));
+                    return;
+                } else {
+                    beginDate = mTimeStr;
+                    tvStartDate.setText(beginDate);
+                }
+            } else {
+                beginDate = mTimeStr;
+                tvStartDate.setText(beginDate);
+            }
         } else {
             LogUtil.i("zzz1", "endDate--->  " + mTimeStr);
-            endDate = mTimeStr;
-            tvEndDate.setText(endDate);
+            if (!StringUtils.isStrEmpty(beginDate)) {
+                Date beginTime = DateUtils.getDateFromString(beginDate, "yyyy-MM-dd HH:mm");
+                Date dateSelect = DateUtils.getDateFromString(mTimeStr, "yyyy-MM-dd HH:mm");
+                if (dateSelect.getTime() <= beginTime.getTime()) {
+                    showCustomToast(getResources().getString(R.string.select_time_before_start));
+                    return;
+                } else {
+                    endDate = mTimeStr;
+                    tvEndDate.setText(endDate);
+                }
+            } else {
+                endDate = mTimeStr;
+                tvEndDate.setText(endDate);
+            }
         }
 
 //        tvMaintenanceDate.setText(maintenanceDate);
@@ -205,13 +247,14 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
      * 获取当前登录人会议信息列表
      */
     private void getMeetingList() {
+        meetingList.clear();
         boolean connected = NetworkDetector.isNetworkConnected(this);
         if (connected) {
-            if (!StringUtils.isStrEmpty(beginDate) && StringUtils.isStrEmpty(endDate)){
+            if (!StringUtils.isStrEmpty(beginDate) && StringUtils.isStrEmpty(endDate)) {
                 showCustomToast(getString(R.string.date_tip1));
                 return;
             }
-            if (StringUtils.isStrEmpty(beginDate) && !StringUtils.isStrEmpty(endDate)){
+            if (StringUtils.isStrEmpty(beginDate) && !StringUtils.isStrEmpty(endDate)) {
                 showCustomToast(getString(R.string.date_tip));
                 return;
             }
@@ -235,27 +278,64 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                                 TypeToken<List<MeetingItemBean>> typeToken = new TypeToken<List<MeetingItemBean>>() {
                                 };
                                 List<MeetingItemBean> modelBeanList = (List<MeetingItemBean>) StringUtils.convertMapToList(data, typeToken);
+                                LogUtil.i("zzz1", "modelBeanList--->  " + modelBeanList.size());
                                 if (modelBeanList != null && modelBeanList.size() > 0) {
-                                    meetingList.clear();
                                     meetingList.addAll(modelBeanList);
-                                    adapter.notifyDataSetChanged();
+                                    tvNoDate.setVisibility(View.GONE);
+                                } else {
+                                    tvNoDate.setVisibility(View.VISIBLE);
+                                    tvNoDate.setText(getString(R.string.no_date));
                                 }
-
-                            }else {
+                            } else {
                                 showCustomToast(getString(R.string.system_error_tip));
+                                tvNoDate.setVisibility(View.VISIBLE);
+                                tvNoDate.setText(getString(R.string.system_error_tip));
                             }
                         } else {
                             String message = (String) resultMap.get("message");
-                            showCustomToast(message);
+//                            showCustomToast(message);
+                            tvNoDate.setVisibility(View.VISIBLE);
+                            if (!StringUtils.isStrEmpty(message)) {
+                                tvNoDate.setText(message);
+                            }
                         }
                     } else {
                         showCustomToast(getString(R.string.system_error_tip));
+                        tvNoDate.setVisibility(View.VISIBLE);
+                        tvNoDate.setText(getString(R.string.system_error_tip));
                     }
+                    adapter.notifyDataSetChanged();
                 }
             });
             commAsyncTask.execute(Constant.GET_MEETING_LIST, null, JsonUtil.toJson(reqParamMap));
         } else {
             showCustomToast(getString(R.string.net_exception_tip));
+            tvNoDate.setVisibility(View.VISIBLE);
+            tvNoDate.setText(getString(R.string.net_exception_tip));
+        }
+    }
+
+    /**
+     * 点击两次退出
+     */
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
         }
     }
 

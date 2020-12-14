@@ -82,7 +82,7 @@ public class DiscussActivity extends AppCompatActivity {
         ActivityManager.getInstance().addActivity(this);
         initView();
         initEvent();
-        getApplyCommentList();
+        getApplyCommentList(0);
     }
 
     /**
@@ -160,13 +160,13 @@ public class DiscussActivity extends AppCompatActivity {
     /**
      * 获取会议互动讨论列表
      */
-    private void getApplyCommentList() {
+    private void getApplyCommentList(int show) {
         boolean connected = NetworkDetector.isNetworkConnected(this);
         if (connected) {
             Map<String, String> reqParamMap = new HashMap<>();
             reqParamMap.put("meetingApplyId", meetingApplyId);
             HttpGetAsyncTask commAsyncTask = new HttpGetAsyncTask(this, null);
-            commAsyncTask.setShowDialog(0);
+            commAsyncTask.setShowDialog(show);
             commAsyncTask.setGetCompleteListener(new HttpGetAsyncTask.ReqGetCompleteListener() {
                 @Override
                 public void reqGetComplete(Map<String, Object> resultMap) {
@@ -337,10 +337,17 @@ public class DiscussActivity extends AppCompatActivity {
                     String message = new String(mqttMessage.getPayload(), Charset.defaultCharset());
 //                    log.info(message);
 //                    LogUtil.i("messageArrived", "" + message);
-                    LogUtil.i("zzz1", "messageArrived " + message);
+                    LogUtil.i("zzz1", "messageArrived " + message + "  " + StringUtils.isStrEmpty(message));
 
                     if (!StringUtils.isStrEmpty(message)) {
-                        getApplyCommentList();
+                        LogUtil.i("zzz1", "更新 " + Thread.currentThread().getName());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                getApplyCommentList(2);
+                            }
+                        });
+
                     }
                 }
 
@@ -382,7 +389,7 @@ public class DiscussActivity extends AppCompatActivity {
             reqParamMap.put("comment", comment);
             reqParamMap.put("meetingApplyId", meetingApplyId);
             HttpPostAsyncTask commAsyncTask = new HttpPostAsyncTask(this, null);
-            commAsyncTask.setShowDialog(0);
+            commAsyncTask.setShowDialog(2);
             commAsyncTask.setPostCompleteListener(new HttpPostAsyncTask.PostFormCompleteListener() {
                 @Override
                 public void postFormComplete(Map<String, Object> resultMap, Map<String, String> reqMap) {
@@ -393,7 +400,7 @@ public class DiscussActivity extends AppCompatActivity {
                                 dialog.clearText();
                                 dialog.dismiss();
                             }
-                            getApplyCommentList();
+                            getApplyCommentList(2);
                         } else {
                             String message = (String) resultMap.get("message");
                             showCustomToast(message);

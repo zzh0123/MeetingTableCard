@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp131"
+    android:layout_height="@dimen/px119"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/c_F4F5F7"
+    android:gravity="center"
+    android:paddingTop="@dimen/dp7_5"
+    android:paddingBottom="@dimen/dp7_5"
+    android:id="@+id/ll_date"
+    android:layout_marginRight="@dimen/dp1">
+
+    <TextView
+        android:id="@+id/tv_week"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/c_909399"
+        android:textSize="@dimen/textSp7"
+        tools:text="周一"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/tv_month_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/c_606266"
+        android:textSize="@dimen/textT6"
+        tools:text="24"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/px9"/>
+</LinearLayout>

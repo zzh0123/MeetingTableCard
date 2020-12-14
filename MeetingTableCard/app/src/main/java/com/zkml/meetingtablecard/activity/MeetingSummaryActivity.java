@@ -1,9 +1,11 @@
 package com.zkml.meetingtablecard.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -20,23 +22,29 @@ import com.zkml.meetingtablecard.bean.AttachmentBean;
 import com.zkml.meetingtablecard.bean.ParticipantsBean;
 import com.zkml.meetingtablecard.constant.Constant;
 import com.zkml.meetingtablecard.utils.ActivityManager;
+import com.zkml.meetingtablecard.utils.LogUtil;
 import com.zkml.meetingtablecard.utils.MyTextUtil;
 import com.zkml.meetingtablecard.utils.NetworkDetector;
 import com.zkml.meetingtablecard.utils.ToastUtils;
 import com.zkml.meetingtablecard.utils.asynctask.HttpGetAsyncTask;
 import com.zkml.meetingtablecard.utils.cache.StringUtils;
+import com.zkml.meetingtablecard.view.dialog.CommentDialog;
+import com.zkml.meetingtablecard.view.dialog.ImageDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 /**
  * @author: zzh
  * data : 2020/12/09
  * description：目录页
  */
-public class MeetingSummaryActivity extends AppCompatActivity {
+public class MeetingSummaryActivity extends AppCompatActivity implements
+        EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
     /**
      * 会议id, 日期
      */
@@ -56,6 +64,11 @@ public class MeetingSummaryActivity extends AppCompatActivity {
     private List<AttachmentBean> attachmentList = new ArrayList<>();
     private AttachmentAdapter adapter;
     private LinearLayout llBack;
+    /**
+     * fileUrl
+     */
+    private String mFileUrl;
+    private ImageDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +81,7 @@ public class MeetingSummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_meeting_summary);
         ActivityManager.getInstance().addActivity(this);
         initView();
+        initEvent();
         getMeetingSummary();
     }
 
@@ -90,23 +104,61 @@ public class MeetingSummaryActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new AttachmentAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                String url = attachmentList.get(pos).getUrl();
-                if (!StringUtils.isStrEmpty(url)) {
-                    Intent intent = new Intent(MeetingSummaryActivity.this, FileDisplayActivity.class);
-                    intent.putExtra("fileUrl", url);
-                    startActivity(intent);
+                mFileUrl = attachmentList.get(pos).getUrl();
+                String type =  attachmentList.get(pos).getType();
+                LogUtil.i("zzz1", "type " + type);
+                if ("1".equals(type)){ // 1图片  2其他
+                    showDialog(mFileUrl);
+                } else {
+                    if (!EasyPermissions.hasPermissions(MeetingSummaryActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        // ask permission with ReasonOfPermission, RequestCord and PermissionName
+                        EasyPermissions.requestPermissions(MeetingSummaryActivity.this, getString(R.string.need_storage), 1, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//                LogUtil.i("zzz1", "requestPermissions ");
+                    } else {
+                        showFile(mFileUrl);
+                    }
                 }
             }
         });
         recyclerView.setAdapter(adapter);
-
         llBack = findViewById(R.id.ll_back);
+
+    }
+
+    private void initEvent() {
         llBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+    }
+
+    private void showDialog(String url) {
+        if (dialog == null) {
+            dialog = new ImageDialog(this);
+            dialog.setImageUrl(url);
+            dialog.setNoOnclickListener(new ImageDialog.OnCancelOnclickListener() {
+                @Override
+                public void onCancelClick() {
+                    dialog.dismiss();
+                    dialog = null;
+                }
+            });
+            WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+            lp.dimAmount = 0.5f;
+            dialog.getWindow().setAttributes(lp);
+            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            dialog.show();
+        }
+    }
+
+    private void showFile(String fileUrl){
+        if (!StringUtils.isStrEmpty(fileUrl)) {
+            Intent intent = new Intent(MeetingSummaryActivity.this, FileDisplayActivity.class);
+            intent.putExtra("fileUrl", fileUrl);
+            startActivity(intent);
+        }
     }
 
     /**
@@ -145,8 +197,8 @@ public class MeetingSummaryActivity extends AppCompatActivity {
                                     tvSummaryContent.setText(Html.fromHtml(summaryContent));
                                 }
                                 // 附件
-                                String attachment = (String) dataMap.get("attachment");
-                                setAttachmentList(attachment);
+                                String attachmentUrl = (String) dataMap.get("attachmentUrl");
+                                setAttachmentList(attachmentUrl);
                             } else {
                                 showCustomToast(getString(R.string.system_error_tip));
                             }
@@ -192,6 +244,48 @@ public class MeetingSummaryActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    // 动态权限
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+        // 允许使用权限
+        if (requestCode == 1) {
+            showFile(mFileUrl);
+            LogUtil.i("zzz1", "onPermissionsGranted: ");
+        }
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+        // 拒绝使用权限
+        if (requestCode == 1) {
+            LogUtil.i("zzz1", "onPermissionsDenied: ");
+//            mVersionUpdateManager.showAlertDialog();
+        }
+    }
+
+    @Override
+    public void onRationaleAccepted(int requestCode) {
+        // 再次询问权限，点击确认回调
+        if (requestCode == 1) {
+            LogUtil.i("zzz1", "onRationaleAccepted: ");
+        }
+    }
+
+    @Override
+    public void onRationaleDenied(int requestCode) {
+        // 再次询问权限，点击取消回调
+        if (requestCode == 1) {
+            showCustomToast(getString(R.string.need_storage));
+            LogUtil.i("zzz1", "onRationaleDenied: ");
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     public void showCustomToast(String pMsg) {

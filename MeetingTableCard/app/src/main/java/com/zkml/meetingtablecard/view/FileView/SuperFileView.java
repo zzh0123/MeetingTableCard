@@ -78,6 +78,7 @@ public class SuperFileView extends FrameLayout implements TbsReaderView.ReaderCa
             if (this.mTbsReaderView == null)
                 this.mTbsReaderView = getTbsReaderView(context);
             boolean bool = this.mTbsReaderView.preOpen(getFileType(mFile.toString()), false);
+            LogUtil.e("zzz1", "can open " + bool);
             if (bool) {
                 this.mTbsReaderView.openFile(localBundle);
             }

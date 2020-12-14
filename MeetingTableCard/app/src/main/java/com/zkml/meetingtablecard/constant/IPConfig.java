@@ -27,10 +27,10 @@ public class IPConfig {
     ///false:测试网。true：公网
     public static boolean setFlag(boolean flag) {
         if (flag) {//公网
-            IPCONFIG = "http://app-gateway.luoex.cn:8088";//API网关地址
+            IPCONFIG = "http://119.3.57.254:32568";//API网关地址
             LOGIN_IPCONFIG = "http://person.http.luoex.xin:6969";
             SERVER_URI = "tcp://imessage.broker.luoex.xin:20555"; // 生产环境, 消息订阅tcp接口地址
-            SERVER_NAME = "/meeting-test";
+            SERVER_NAME = "/meeting";
             return true;
         } else {//测试网
 //            IPCONFIG = "http://10.5.4.49:4404";//个人平台-重构调试

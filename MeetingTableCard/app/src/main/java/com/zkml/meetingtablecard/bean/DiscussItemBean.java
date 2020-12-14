@@ -16,7 +16,7 @@ public class DiscussItemBean {
 
     private String commentTime;
 
-    private String selfFlag;
+    private boolean selfFlag;
 
     private int totalLikeCount;
 
@@ -54,10 +54,10 @@ public class DiscussItemBean {
     public String getCommentTime(){
         return this.commentTime;
     }
-    public void setSelfFlag(String selfFlag){
+    public void setSelfFlag(boolean selfFlag){
         this.selfFlag = selfFlag;
     }
-    public String getSelfFlag(){
+    public boolean getSelfFlag(){
         return this.selfFlag;
     }
     public void setTotalLikeCount(int totalLikeCount){
